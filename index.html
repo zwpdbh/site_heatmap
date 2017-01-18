@@ -11,17 +11,19 @@
 
     <script src="js/myJs/d3Heatmap.js"></script>
     <script>
+    </script>
+    <script>
         $(document).ready(function () {
             $('#submit').on('click', function () {
                 var between = $('#between').val();
                 var and = $('#and').val();
-                console.log([between, and]);
                 if (between && and) {
                     $.ajax('ajaxGetUsageData.php', {
                         type: 'POST',
                         data: {'between': between, 'and': and},
                         success: function (data) {
-                            $('#testAjax').html(data);
+                            var usageData = $.parseJSON(data);
+                            makeHeatMap(usageData);
                         }
                     });
                 }

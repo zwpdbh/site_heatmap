@@ -22,16 +22,14 @@ if (isset($_POST['between']) && !empty($_POST['between'])) {
     $peroid = getPeriod($upperBound, $lowerBound, $between, $and);
 
     $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
-    echo "<br>";
-    echo "Period is: ".$peroid[0]." ~ ".$peroid[1];
-    echo "<br>";
-
 
     $queryString = sprintf($query, $peroid[0], $peroid[1]);
-    $usagePoints = $db->query($queryString)->getPoints();
+    $testQueryString = "select mean(*) from powerusage where time > '2015-01-01' and time < '2015-01-03' group by time(1d)";
 
-    echo "<br>";
-    print_r(json_encode($usagePoints));
+    // use test data, change back to $queryString later
+    $usagePoints = $db->query($testQueryString)->getPoints();
+
+    echo json_encode($usagePoints);
 
 } else {
     echo "<p>Ajax Data Failed for period data selection!</p>";
@@ -39,16 +37,6 @@ if (isset($_POST['between']) && !empty($_POST['between'])) {
 
 
 function getPeriod($upperLimit, $lowerrLimit, $start, $end) {
-    echo "<br>";
-    echo "upperLimit: ".$upperLimit;
-    echo "<br>";
-    echo "lowerLimit: ".$lowerrLimit;
-    echo "<br>";
-    echo "between: ".$start;
-    echo "<br>";
-    echo "and: ".$end;
-    echo "<br>";
-
     $start = min(max(strtotime($start), strtotime($lowerrLimit)), strtotime($upperLimit));
     $end = max(min(strtotime($end), strtotime($upperLimit)), strtotime($lowerrLimit));
     return [date('Y-m-d H:i:s', $start), date('Y-m-d H:i:s', $end)];
