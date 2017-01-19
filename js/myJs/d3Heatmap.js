@@ -6,7 +6,7 @@
 function makeHeatMap(data) {
     console.log(data);
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
-    var monthDayFormat = d3.timeFormat('%m.%d');
+    var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
     data.forEach(function (d) {
         d.dateTime = parseTime(d.time);
@@ -72,8 +72,7 @@ function makeHeatMap(data) {
     svg.style("width", svgWidth).style("height", svgHeight);
 
 
-    svg.append("g")
-    // .attr("transform", "translate(" + margin + "," + margin +")")
+    var rect = svg.append("g")
         .selectAll("rect")
         .data(data)
         .enter()
@@ -103,6 +102,19 @@ function makeHeatMap(data) {
         .attr("id", "yAxisG")
         .attr("transform", "translate(" + margin + "," + (0) +")")
         .call(yAxis);
+
+    svg.filter(function (d) {
+        return d in data;
+    });
+
+    // add info on block
+    rect.append("title")
+        .text(function(d) {
+            return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d["mean_bedroomsAndLounge"]).toFixed(2);
+        });
+
+
+
 
 
 }
