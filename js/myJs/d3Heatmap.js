@@ -57,6 +57,9 @@ function makeHeatMap(data) {
     });
     console.log(timeExtent);
 
+    d3.selectAll('[name = selectUsage]').on('click', function () {
+        
+    });
 
     var xScale = d3.scaleLinear().domain([1, totalDays]).range(contentX);
     var yScale = d3.scaleLinear().domain([0, 23]).range(contentY);
@@ -76,19 +79,20 @@ function makeHeatMap(data) {
 
 
     // get the maximum power usage
-    var bedroomsAndLoungeUsageExtent = d3.extent(data, function (d) {
-        return d['mean_bedroomsAndLounge'];
-    });
-    // var heatPumpExtent = d3.extent(data, function (d) {
-    //     return d['mean_heatPump'];
-    // });
+    var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
+    function getMaxUsageAccordingTo(category) {
+        var usageExtent = d3.extent(data, function (d) {
+            return d[category];
+        });
+        return usageExtent[1];
+    }
 
-    //
-    var colorScale = d3.scaleQuantize().domain([0, bedroomsAndLoungeUsageExtent[1]]).range(colorbrewer.Reds[7]);
+    
+    var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
     var svg = d3.select("#demo").select("svg");
 
     svg.style("width", svgWidth).style("height", svgHeight);
-
+    
 
     var rect = svg.append("g")
         .selectAll("rect")
@@ -130,4 +134,34 @@ function makeHeatMap(data) {
         .text(function(d) {
             return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d["mean_bedroomsAndLounge"]).toFixed(2);
         });
+
+
+
+    // add the description
+    var xScaleForDescription = d3.scaleLinear().domain([0, maximunUsage]).range([margin, margin + 9 * block_width]);
+    var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
+
+    svg.append("g")
+        .selectAll("rect")
+        .data(function () {
+            return colorbrewer.Reds[9];
+        })
+        .enter()
+        .append("rect")
+        .attr('width', block_width)
+        .attr('height', block_height)
+        .attr('x', function (d, i) {
+            return  margin + i * block_width;
+        })
+        .attr('y', function (d, i) {
+            return margin / 3;
+        })
+        .style('fill', function (d, i) {
+            return colorbrewer.Reds[9][i];
+        });
+    svg.append("g")
+        .attr("id", "xScaleForDescriptionG")
+        .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
+        .call(xAxisForDescription);
+
 }

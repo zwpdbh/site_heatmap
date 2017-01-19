@@ -24,6 +24,7 @@
                         success: function (data) {
                             var usageData = $.parseJSON(data);
                             $('#demo').css('visibility', 'visible');
+                            $('#usageSelection').css('visibility', 'visible');
                             makeHeatMap(usageData);
                         }
                     });
@@ -46,6 +47,32 @@
 
         <input type="submit" value="Submit" id="submit">
     </form>
+    <div id="usageSelection" style="visibility: hidden">
+        <div>
+            <input type="radio" name="selectUsage" value="bedroomsAndLounge" checked>
+            <label>bedroomsAndLounge</label>
+        </div>
+        <div>
+            <input type="radio" name="selectUsage" value="heatPump">
+            <label>heatPump</label>
+        </div>
+        <div>
+            <input type="radio" name="selectUsage" value="incomerAll">
+            <label>incomerAll</label>
+        </div>
+        <div>
+            <input type="radio" name="selectUsage" value="kitchenAppliances">
+            <label>kitchenAppliances</label>
+        </div>
+        <div>
+            <input type="radio" name="selectUsage" value="laundryAndGarage">
+            <label>laundryAndGarage</label>
+        </div>
+        <div>
+            <input type="radio" name="selectUsage" value="oven">
+            <label>oven</label>
+        </div>
+    </div>
 </div>
 <div id="tmp">
     <p id="testAjax"></p>
@@ -53,6 +80,10 @@
 
 <div id="demo" style="visibility: hidden">
     <svg style="border:1px lightgray solid"></svg>
+    <div role="description" class="description">
+        <label>Less</label>
+        <label>More</label>
+    </div>
 </div>
 
 </body>
