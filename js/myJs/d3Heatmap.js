@@ -8,20 +8,38 @@ function makeHeatMap(data) {
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
-    data.forEach(function (d) {
-        d.dateTime = parseTime(d.time);
-        d.day = d.dateTime.getDate();
-        d.hour = d.dateTime.getHours();
+    data[0].dateTime = parseTime(data[0]['time']);
+    data[0].day = data[0].dateTime.getDate();
 
-        d.x = d.day;
-        d.y = d.hour;
-    });
+    var currentDay = data[0].day;
+
+    var indexOfDay = 1;
+
+    for (var i = 0; i < data.length; i++) {
+        data[i].dateTime = parseTime(data[i].time);
+        data[i].hour = data[i].dateTime.getHours();
+        data[i].day = data[i].dateTime.getDate();
+
+        if (currentDay != data[i].day) {
+            currentDay = data[i].day;
+            indexOfDay++;
+        }
+
+
+        data[i].x = indexOfDay;
+        data[i].y = data[i].hour;
+    }
+
+    // data.forEach(function (d) {
+    //     d.dateTime = parseTime(d.time);
+    //     d.hour = d.dateTime.getHours();
+    //     d.day = d.dateTime.getDate();
+    //     d.y = d.hour;
+    // });
 
 
     var totalHours = data.length;
     var totalDays = Math.ceil(totalHours / 24);
-    var startDay = data[0].day;
-    var endDay = data[totalHours - 1].day;
 
     console.log(totalHours);
 
@@ -50,7 +68,7 @@ function makeHeatMap(data) {
 
     var yAxisScale = d3.scaleLinear().domain([0, 23]).range([contentY[0], contentY[1]]);
     var yAxisValues = [];
-    for (var i = 0; i < 24; i++) {
+    for (i = 0; i < 24; i++) {
         yAxisValues.push(i);
     }
     var yAxis = d3.axisLeft(yAxisScale).tickValues(yAxisValues);
