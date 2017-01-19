@@ -70,11 +70,12 @@ function makeHeatMap(data) {
     var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
     drawSVG();
 
-    // d3.selectAll('[name = selectUsage]').on('click', function () {
-    //     var category = $('input[name="selectUsage"]:checked').val();
-    //     maximunUsage = getMaxUsageAccordingTo(category);
-    //     drawSVG();
-    // });
+    d3.selectAll('[name = selectUsage]').on('click', function () {
+        var category = $('input[name="selectUsage"]:checked').val();
+        maximunUsage = getMaxUsageAccordingTo(category);
+
+        console.log(category);
+    });
 
     function drawSVG() {
         var svg = d3.select("#demo").select("svg");
