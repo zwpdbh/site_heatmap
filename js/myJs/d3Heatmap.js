@@ -65,89 +65,95 @@ function makeHeatMap(data) {
         });
         return usageExtent[1];
     }
+
+    // end of setting variables for SVG
     var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
+    render();
 
     d3.selectAll('[name = selectUsage]').on('click', function () {
-        var category = document.getElementsByName('selectUsage')[0].checked;
-        console.log(category);
-    });
-    // end of setting variables for SVG
+        var category = $('input[name="selectUsage"]:checked').val();
+        maximunUsage = getMaxUsageAccordingTo(category);
 
-    
-    var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
-    var svg = d3.select("#demo").select("svg");
-
-    svg.style("width", svgWidth).style("height", svgHeight);
-    
-
-    var rect = svg.append("g")
-        .selectAll("rect")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function (d) {
-            return xScale(d.x);
-        })
-        .attr("y", function (d) {
-            return yScale(d.y);
-        })
-        .attr("height", function () {
-            return block_height;
-        })
-        .attr("width", function () {
-            return block_width;
-        })
-        .style("fill", function (d) {
-            return colorScale(d['mean_bedroomsAndLounge']);
-        });
-
-    // add axis
-    svg.append("g")
-        .attr("id", "xAxisG")
-        .call(xAxis)
-        .attr("transform", "translate(" + 0 + "," + (margin) +")");
-    svg.append("g")
-        .attr("id", "yAxisG")
-        .attr("transform", "translate(" + margin + "," + (0) +")")
-        .call(yAxis);
-
-    svg.filter(function (d) {
-        return d in data;
+        render();
     });
 
-    // add info on block
-    rect.append("title")
-        .text(function(d) {
-            return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d["mean_bedroomsAndLounge"]).toFixed(2);
+    function render() {
+        var svg = d3.select("#demo").select("svg");
+        
+        var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
+
+        svg.style("width", svgWidth).style("height", svgHeight);
+
+
+        var rect = svg.append("g")
+            .selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", function (d) {
+                return xScale(d.x);
+            })
+            .attr("y", function (d) {
+                return yScale(d.y);
+            })
+            .attr("height", function () {
+                return block_height;
+            })
+            .attr("width", function () {
+                return block_width;
+            })
+            .style("fill", function (d) {
+                return colorScale(d['mean_bedroomsAndLounge']);
+            });
+
+        // add axis
+        svg.append("g")
+            .attr("id", "xAxisG")
+            .call(xAxis)
+            .attr("transform", "translate(" + 0 + "," + (margin) +")");
+        svg.append("g")
+            .attr("id", "yAxisG")
+            .attr("transform", "translate(" + margin + "," + (0) +")")
+            .call(yAxis);
+
+        svg.filter(function (d) {
+            return d in data;
         });
 
+        // add info on block
+        rect.append("title")
+            .text(function(d) {
+                return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d["mean_bedroomsAndLounge"]).toFixed(2);
+            });
 
 
-    // add the description
-    var xScaleForDescription = d3.scaleLinear().domain([0, maximunUsage]).range([margin, margin + 9 * block_width]);
-    var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
 
-    svg.append("g")
-        .selectAll("rect")
-        .data(function () {
-            return colorbrewer.Reds[9];
-        })
-        .enter()
-        .append("rect")
-        .attr('width', block_width)
-        .attr('height', block_height)
-        .attr('x', function (d, i) {
-            return  margin + i * block_width;
-        })
-        .attr('y', function (d, i) {
-            return margin / 3;
-        })
-        .style('fill', function (d, i) {
-            return colorbrewer.Reds[9][i];
-        });
-    svg.append("g")
-        .attr("id", "xScaleForDescriptionG")
-        .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
-        .call(xAxisForDescription);
+        // add the description
+        var xScaleForDescription = d3.scaleLinear().domain([0, maximunUsage]).range([margin, margin + 9 * block_width]);
+        var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
+
+        svg.append("g")
+            .selectAll("rect")
+            .data(function () {
+                return colorbrewer.Reds[9];
+            })
+            .enter()
+            .append("rect")
+            .attr('width', block_width)
+            .attr('height', block_height)
+            .attr('x', function (d, i) {
+                return  margin + i * block_width;
+            })
+            .attr('y', function (d, i) {
+                return margin / 3;
+            })
+            .style('fill', function (d, i) {
+                return colorbrewer.Reds[9][i];
+            });
+        svg.append("g")
+            .attr("id", "xScaleForDescriptionG")
+            .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
+            .call(xAxisForDescription);
+    }
 
 }
