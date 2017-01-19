@@ -4,7 +4,8 @@
 
 
 function makeHeatMap(data) {
-    console.log(data);
+
+    // setting for variables
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
@@ -12,7 +13,6 @@ function makeHeatMap(data) {
     data[0].day = data[0].dateTime.getDate();
 
     var currentDay = data[0].day;
-
     var indexOfDay = 1;
 
     for (var i = 0; i < data.length; i++) {
@@ -24,25 +24,12 @@ function makeHeatMap(data) {
             currentDay = data[i].day;
             indexOfDay++;
         }
-
-
         data[i].x = indexOfDay;
         data[i].y = data[i].hour;
     }
 
-    // data.forEach(function (d) {
-    //     d.dateTime = parseTime(d.time);
-    //     d.hour = d.dateTime.getHours();
-    //     d.day = d.dateTime.getDate();
-    //     d.y = d.hour;
-    // });
-
-
     var totalHours = data.length;
     var totalDays = Math.ceil(totalHours / 24);
-
-    console.log(totalHours);
-
 
     var margin = 80;
     var block_width = 20;
@@ -54,11 +41,6 @@ function makeHeatMap(data) {
     var svgHeight = contentY[1] + margin;
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
-    });
-    console.log(timeExtent);
-
-    d3.selectAll('[name = selectUsage]').on('click', function () {
-        
     });
 
     var xScale = d3.scaleLinear().domain([1, totalDays]).range(contentX);
@@ -76,16 +58,20 @@ function makeHeatMap(data) {
     }
     var yAxis = d3.axisLeft(yAxisScale).tickValues(yAxisValues);
 
-
-
     // get the maximum power usage
-    var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
     function getMaxUsageAccordingTo(category) {
         var usageExtent = d3.extent(data, function (d) {
             return d[category];
         });
         return usageExtent[1];
     }
+    var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
+
+    d3.selectAll('[name = selectUsage]').on('click', function () {
+        var category = document.getElementsByName('selectUsage')[0].checked;
+        console.log(category);
+    });
+    // end of setting variables for SVG
 
     
     var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
