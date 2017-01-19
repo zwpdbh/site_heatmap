@@ -68,22 +68,18 @@ function makeHeatMap(data) {
 
     // end of setting variables for SVG
     var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
-    render();
+    drawSVG();
 
-    d3.selectAll('[name = selectUsage]').on('click', function () {
-        var category = $('input[name="selectUsage"]:checked').val();
-        maximunUsage = getMaxUsageAccordingTo(category);
+    // d3.selectAll('[name = selectUsage]').on('click', function () {
+    //     var category = $('input[name="selectUsage"]:checked').val();
+    //     maximunUsage = getMaxUsageAccordingTo(category);
+    //     drawSVG();
+    // });
 
-        render();
-    });
-
-    function render() {
+    function drawSVG() {
         var svg = d3.select("#demo").select("svg");
-        
         var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
-
         svg.style("width", svgWidth).style("height", svgHeight);
-
 
         var rect = svg.append("g")
             .selectAll("rect")
