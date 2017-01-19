@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajaxGetUsageData.php" afterPath="$PROJECT_DIR$/ajaxGetUsageData.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
     </list>
@@ -36,10 +36,36 @@
       <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
+            <state relative-caret-position="285">
+              <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="855">
+              <caret line="57" column="7" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
               <folding>
-                <element signature="e#1383#1437#0" expanded="false" />
+                <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#svg#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajaxGetUsageData.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+              <folding>
+                <marker date="1484802059000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
+                <marker date="1484802059000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
+                <marker date="1484802059000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
+                <marker date="1484802059000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
               </folding>
             </state>
           </provider>
@@ -68,8 +94,8 @@
         <option value="$PROJECT_DIR$/js/datePicker.js" />
         <option value="$PROJECT_DIR$/getMonthlyData.php" />
         <option value="$PROJECT_DIR$/js/supportingJs/datePicker.js" />
-        <option value="$PROJECT_DIR$/ajaxGetUsageData.php" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/ajaxGetUsageData.php" />
         <option value="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
       </list>
     </option>
@@ -286,12 +312,12 @@
       <workItem from="1484728148455" duration="3777000" />
       <workItem from="1484732813094" duration="15000" />
       <workItem from="1484784276472" duration="3187000" />
-      <workItem from="1484791978481" duration="1093000" />
+      <workItem from="1484791978481" duration="7377000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28879000" />
+    <option name="totallyTimeSpent" value="35163000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -360,9 +386,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1383#1437#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -379,10 +403,10 @@
         <state relative-caret-position="390">
           <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
           <folding>
-            <marker date="1484786065000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
           </folding>
         </state>
       </provider>
@@ -403,10 +427,10 @@
         <state relative-caret-position="390">
           <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
           <folding>
-            <marker date="1484786065000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
           </folding>
         </state>
       </provider>
@@ -415,9 +439,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1383#1437#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -437,10 +459,10 @@
         <state relative-caret-position="390">
           <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
           <folding>
-            <marker date="1484786065000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
           </folding>
         </state>
       </provider>
@@ -449,9 +471,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1383#1437#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -494,10 +514,10 @@
         <state relative-caret-position="765">
           <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
           <folding>
-            <marker date="1484786065000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
           </folding>
         </state>
       </provider>
@@ -545,9 +565,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-          <folding>
-            <element signature="e#1383#1437#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -583,9 +601,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-          <folding>
-            <element signature="e#1383#1437#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -722,30 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-          <folding>
-            <marker date="1484786065000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
-            <marker date="1484786065000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/supportingJs/colorbrewer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -754,13 +746,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+          <folding>
+            <marker date="1484802059000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="671:753" ph="SELECT mean(... powerusage" />
+            <marker date="1484802059000" expanded="true" signature="841:939" ph="select mean(... powerusage" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="57" column="7" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#svg#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
-          <folding>
-            <element signature="e#1383#1437#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="285">
+          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>

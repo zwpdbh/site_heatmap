@@ -6,6 +6,7 @@
 function makeHeatMap(data) {
     console.log(data);
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+    var monthDayFormat = d3.timeFormat('%m.%d');
 
     data.forEach(function (d) {
         d.dateTime = parseTime(d.time);
@@ -25,21 +26,36 @@ function makeHeatMap(data) {
     console.log(totalHours);
 
 
-    var svgHeight = 500;
-    var svgWidth = 500 > totalDays * 10 ? 500 : totalDays * 10;
-    var margin = 50;
-    
+    var margin = 80;
+    var block_width = 20;
+    var block_height = 20;
+
+    var contentY = [margin, 24 * block_height + margin];
+    var contentX = [margin, totalDays * block_width + margin];
+    var svgWidth = contentX[1] + margin;
+    var svgHeight = contentY[1] + margin;
+    var timeExtent = d3.extent(data, function (d) {
+        return parseTime(d.time);
+    });
+    console.log(timeExtent);
 
 
-    var xScale = d3.scaleLinear().domain([1, totalDays]).range([margin, svgWidth]);
-    var yScale = d3.scaleLinear().domain([0, 23]).range([margin, svgHeight- margin]);
+    var xScale = d3.scaleLinear().domain([1, totalDays]).range(contentX);
+    var yScale = d3.scaleLinear().domain([0, 23]).range(contentY);
 
 
-    var xAxisScale = d3.scaleLinear().domain([startDay, endDay]).range([margin, svgWidth]);
-    var yAxisScale = d3.scaleLinear().domain([0, 23]).range([margin, svgHeight - margin]);
+    var timeScale = d3.scaleTime().domain(timeExtent).range(contentX);
+    var xAxis = d3.axisTop(timeScale);
 
-    var xAxis = d3.axisBottom(xAxisScale).tickSize(svgHeight - margin - margin + 10).tickValues(svgHeight);
-    var yAxis = d3.axisRight(yAxisScale).tickSize(svgWidth - margin + 10).tickValues(svgWidth);
+
+    var yAxisScale = d3.scaleLinear().domain([0, 23]).range([contentY[0], contentY[1]]);
+    var yAxisValues = [];
+    for (var i = 0; i < 24; i++) {
+        yAxisValues.push(i);
+    }
+    var yAxis = d3.axisLeft(yAxisScale).tickValues(yAxisValues);
+
+
 
     // get the maximum power usage
     var bedroomsAndLoungeUsageExtent = d3.extent(data, function (d) {
@@ -53,7 +69,7 @@ function makeHeatMap(data) {
     var colorScale = d3.scaleQuantize().domain([0, bedroomsAndLoungeUsageExtent[1]]).range(colorbrewer.Reds[7]);
     var svg = d3.select("#demo").select("svg");
 
-
+    svg.style("width", svgWidth).style("height", svgHeight);
 
 
     svg.append("g")
@@ -68,11 +84,11 @@ function makeHeatMap(data) {
         .attr("y", function (d) {
             return yScale(d.y);
         })
-        .attr("width", function () {
-            return svgWidth / totalDays;
-        })
         .attr("height", function () {
-            return svgHeight / 24;
+            return block_height;
+        })
+        .attr("width", function () {
+            return block_width;
         })
         .style("fill", function (d) {
             return colorScale(d['mean_bedroomsAndLounge']);
