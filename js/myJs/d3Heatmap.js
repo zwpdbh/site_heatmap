@@ -51,33 +51,34 @@ function makeHeatMap(data) {
 
     //
     var colorScale = d3.scaleQuantize().domain([0, bedroomsAndLoungeUsageExtent[1]]).range(colorbrewer.Reds[7]);
-    //
-    //
-    //
-    // svg.append("g")
-    // // .attr("transform", "translate(" + margin + "," + margin +")")
-    //     .selectAll("rect")
-    //     .data(processedHourlyData)
-    //     .enter()
-    //     .append("rect")
-    //     .attr("x", function (d) {
-    //         return xScale(d.x);
-    //     })
-    //     .attr("y", function (d) {
-    //         return yScale(d.y);
-    //     })
-    //     .attr("width", function () {
-    //         return blockWidth;
-    //     })
-    //     .attr("height", function () {
-    //         return blockHeight;
-    //     })
-    //     .style("fill", function (d) {
-    //         return colorScale(d.laundrayAndGarage);
-    //     });
-    //
+    var svg = d3.select("#demo").select("svg");
+
+
+
+
+    svg.append("g")
+    // .attr("transform", "translate(" + margin + "," + margin +")")
+        .selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", function (d) {
+            return xScale(d.x);
+        })
+        .attr("y", function (d) {
+            return yScale(d.y);
+        })
+        .attr("width", function () {
+            return svgWidth / totalDays;
+        })
+        .attr("height", function () {
+            return svgHeight / 24;
+        })
+        .style("fill", function (d) {
+            return colorScale(d['mean_bedroomsAndLounge']);
+        });
+
     // add axis
-    var svg = d3.select("#demo").select("svg")
     svg.append("g")
         .attr("id", "xAxisG")
         .call(xAxis)

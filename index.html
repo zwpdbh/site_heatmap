@@ -23,7 +23,7 @@
                         data: {'between': between, 'and': and},
                         success: function (data) {
                             var usageData = $.parseJSON(data);
-                            $('#demo').css().hide = false;
+                            $('#demo').css('visibility', 'visible');
                             makeHeatMap(usageData);
                         }
                     });
@@ -50,8 +50,10 @@
 <div id="tmp">
     <p id="testAjax"></p>
 </div>
-<div id="demo" hidden="hidden">
-    <svg style="width:800px;height:500px;border:1px lightgray solid;"></svg>
+
+<div id="demo" style="visibility: hidden">
+    <svg style="width:800px;height:500px;border:1px lightgray solid"></svg>
 </div>
+
 </body>
 </html>
