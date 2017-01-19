@@ -112,9 +112,4 @@ function makeHeatMap(data) {
         .text(function(d) {
             return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d["mean_bedroomsAndLounge"]).toFixed(2);
         });
-
-
-
-
-
 }

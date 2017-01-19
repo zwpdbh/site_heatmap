@@ -24,7 +24,7 @@ if (isset($_POST['between']) && !empty($_POST['between'])) {
     $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
 
     $queryString = sprintf($query, $peroid[0], $peroid[1]);
-    $testQueryString = "select mean(*) from powerusage where time > '2015-01-01' and time < '2015-01-30' group by time(1h)";
+    $testQueryString = "select mean(*) from powerusage where time > '2015-01-01' and time < '2015-02-20' group by time(1h)";
 
     // use test data, change back to $queryString later
     $usagePoints = $db->query($testQueryString)->getPoints();
