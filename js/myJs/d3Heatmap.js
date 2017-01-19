@@ -8,6 +8,7 @@ function makeHeatMap(data) {
     // setting for variables
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
+    var svg = d3.select("#demo").select("svg");
 
     data[0].dateTime = parseTime(data[0]['time']);
     data[0].day = data[0].dateTime.getDate();
@@ -67,18 +68,23 @@ function makeHeatMap(data) {
     }
 
     // end of setting variables for SVG
-    var maximunUsage = getMaxUsageAccordingTo('mean_bedroomsAndLounge');
+    var category = "mean_" + "bedroomsAndLounge";
+    var maximunUsage = getMaxUsageAccordingTo(category);
     drawSVG();
 
     d3.selectAll('[name = selectUsage]').on('click', function () {
-        var category = $('input[name="selectUsage"]:checked').val();
+        var category = "mean_" + $('input[name="selectUsage"]:checked').val();
         maximunUsage = getMaxUsageAccordingTo(category);
-
         console.log(category);
+
+        drawSVG();
     });
 
     function drawSVG() {
-        var svg = d3.select("#demo").select("svg");
+
+        // svg.remove();
+        svg = d3.select("#demo").select("svg");
+
         var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
         svg.style("width", svgWidth).style("height", svgHeight);
 
@@ -100,7 +106,7 @@ function makeHeatMap(data) {
                 return block_width;
             })
             .style("fill", function (d) {
-                return colorScale(d['mean_bedroomsAndLounge']);
+                return colorScale(d[category]);
             });
 
         // add axis
@@ -120,7 +126,7 @@ function makeHeatMap(data) {
         // add info on block
         rect.append("title")
             .text(function(d) {
-                return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d["mean_bedroomsAndLounge"]).toFixed(2);
+                return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d[category]).toFixed(2);
             });
 
 
