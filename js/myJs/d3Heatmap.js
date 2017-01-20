@@ -122,7 +122,7 @@ function makeHeatMap(data) {
         .attr('width', block_width * 2)
         .attr('height', block_height)
         .attr('x', function (d, i) {
-            return margin + i * block_width * 2;
+            return margin + i * block_width * 2;  // the power usage number can be long, so make the rect twice width
         })
         .attr('y', function (d, i) {
             return margin / 3;
