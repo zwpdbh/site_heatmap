@@ -2,6 +2,9 @@
  * Created by zw on 07/01/2017.
  */
 
+// event for select radio button
+
+
 
 function makeHeatMap(data) {
 
@@ -9,6 +12,9 @@ function makeHeatMap(data) {
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
     var svg = d3.select("#demo").select("svg");
+
+    var maximumUsage = null;
+    var category = "mean_" + "bedroomsAndLounge";
 
     data[0].dateTime = parseTime(data[0]['time']);
     data[0].day = data[0].dateTime.getDate();
@@ -68,91 +74,96 @@ function makeHeatMap(data) {
     }
 
     // end of setting variables for SVG
-    var category = "mean_" + "bedroomsAndLounge";
-    var maximunUsage = getMaxUsageAccordingTo(category);
-    drawSVG();
+    maximumUsage = getMaxUsageAccordingTo(category);
+
+
+
+    // Begin: SVG
+    svg = d3.select("#demo").select("svg");
+    svg.style("width", svgWidth).style("height", svgHeight);
+    var colorScale = d3.scaleQuantize().domain([0, maximumUsage]).range(colorbrewer.Reds[9]);
+    // draw rect
+    var rect = svg.append("g")
+        .selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", function (d) {
+            return xScale(d.x);
+        })
+        .attr("y", function (d) {
+            return yScale(d.y);
+        })
+        .attr("height", function () {
+            return block_height;
+        })
+        .attr("width", function () {
+            return block_width;
+        });
+
+    // add axis
+    svg.append("g")
+        .attr("id", "xAxisG")
+        .call(xAxis)
+        .attr("transform", "translate(" + 0 + "," + (margin) + ")");
+    svg.append("g")
+        .attr("id", "yAxisG")
+        .attr("transform", "translate(" + margin + "," + (0) + ")")
+        .call(yAxis);
+
+    // rect for description
+    svg.append("g")
+        .selectAll("rect")
+        .data(function () {
+            return colorbrewer.Reds[9];
+        })
+        .enter()
+        .append("rect")
+        .attr('width', block_width * 2)
+        .attr('height', block_height)
+        .attr('x', function (d, i) {
+            return margin + i * block_width * 2;
+        })
+        .attr('y', function (d, i) {
+            return margin / 3;
+        })
+        .style('fill', function (d, i) {
+            return colorbrewer.Reds[9][i];
+        });
+
+    // ------------infomation that need to be redraw
+        update();
+    // ------------infomation that need to be redraw, END
 
     d3.selectAll('[name = selectUsage]').on('click', function () {
-        var category = "mean_" + $('input[name="selectUsage"]:checked').val();
-        maximunUsage = getMaxUsageAccordingTo(category);
+        category = "mean_" + $('input[name="selectUsage"]:checked').val();
+        maximumUsage = getMaxUsageAccordingTo(category);
         console.log(category);
-
-        drawSVG();
+        update();
     });
 
-    function drawSVG() {
-
-        // svg.remove();
-        svg = d3.select("#demo").select("svg");
-
-        var colorScale = d3.scaleQuantize().domain([0, maximunUsage]).range(colorbrewer.Reds[9]);
-        svg.style("width", svgWidth).style("height", svgHeight);
-
-        var rect = svg.append("g")
-            .selectAll("rect")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("x", function (d) {
-                return xScale(d.x);
-            })
-            .attr("y", function (d) {
-                return yScale(d.y);
-            })
-            .attr("height", function () {
-                return block_height;
-            })
-            .attr("width", function () {
-                return block_width;
-            })
-            .style("fill", function (d) {
-                return colorScale(d[category]);
-            });
-
-        // add axis
-        svg.append("g")
-            .attr("id", "xAxisG")
-            .call(xAxis)
-            .attr("transform", "translate(" + 0 + "," + (margin) +")");
-        svg.append("g")
-            .attr("id", "yAxisG")
-            .attr("transform", "translate(" + margin + "," + (0) +")")
-            .call(yAxis);
-
-        svg.filter(function (d) {
-            return d in data;
+    function update() {
+        // fill the color of rect
+        rect.style("fill", function (d) {
+            return colorScale(d[category]);
         });
 
         // add info on block
+        $('.title').remove();
         rect.append("title")
-            .text(function(d) {
-                return  timeFormatToDisplay(d.dateTime) + " : "  + parseFloat(d[category]).toFixed(2);
-            });
-
-
+            .text(function (d) {
+                console.log('test');
+                return timeFormatToDisplay(d.dateTime) + " : " + parseFloat(d[category]).toFixed(2);
+            }).attr('class', function () {
+            return "title";
+        });
 
         // add the description
-        var xScaleForDescription = d3.scaleLinear().domain([0, maximunUsage]).range([margin, margin + 9 * block_width]);
+        var xScaleForDescription = d3.scaleLinear().domain([0, maximumUsage]).range([margin, margin + 9 * block_width * 2]);
         var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
 
-        svg.append("g")
-            .selectAll("rect")
-            .data(function () {
-                return colorbrewer.Reds[9];
-            })
-            .enter()
-            .append("rect")
-            .attr('width', block_width)
-            .attr('height', block_height)
-            .attr('x', function (d, i) {
-                return  margin + i * block_width;
-            })
-            .attr('y', function (d, i) {
-                return margin / 3;
-            })
-            .style('fill', function (d, i) {
-                return colorbrewer.Reds[9][i];
-            });
+        // add xAxisForDescription
+        $('#xScaleForDescriptionG').remove();
         svg.append("g")
             .attr("id", "xScaleForDescriptionG")
             .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")

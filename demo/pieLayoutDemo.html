@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/supportingJs/d3.min.js"></script>
+    <script src="../js/jquery/jquery-3.1.1.js"></script>
+    <link rel="stylesheet" href="../js/jquery/jquery-ui.css">
+    <script src="../js/jquery/jquery-ui.min.js"></script>
+    <script src="../js/supportingJs/datePicker.js"></script>
+    <script src="../js/supportingJs/colorbrewer.js"></script>
+    <script src="../js/myJs/makePieChart.js"></script>
+    <script>
+        $(document).ready(function () {
+            d3.json("../dataForDemo/tweets.json", function (data) {
+                makePieChart(data['tweets']);
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="demo">
+    <svg style="border:1px lightgray solid; width: 400px; height: 400px"></svg>
+</div>
+</body>
+</html>
