@@ -5,7 +5,6 @@
 // event for select radio button
 
 
-
 function makeHeatMap(data) {
 
     // setting for variables

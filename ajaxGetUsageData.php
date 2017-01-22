@@ -27,7 +27,7 @@ if (isset($_POST['between']) && !empty($_POST['between'])) {
     $testQueryString = "select mean(*) from powerusage where time > '2015-01-21' and time < '2015-03-15' group by time(1h)";
 
     // use test data, change back to $queryString later
-    $usagePoints = $db->query($testQueryString)->getPoints();
+    $usagePoints = $db->query($queryString)->getPoints();
 
     echo json_encode($usagePoints);
 
