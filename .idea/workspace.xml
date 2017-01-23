@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
-    <list id="fd42cda0-3470-409e-aa07-883b5c07b5c0" name="Rejected commit: Default" comment="add more interactive function">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajaxGetUsageData.php" afterPath="$PROJECT_DIR$/ajaxGetUsageData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
-    </list>
+    <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function" />
+    <list id="fd42cda0-3470-409e-aa07-883b5c07b5c0" name="Rejected commit: Default" comment="add more interactive function" />
     <ignored path="site_heatmap.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -49,8 +42,8 @@
       <file leaf-file-name="ajaxGetUsageData.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+            <state relative-caret-position="405">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <marker date="1485061810000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
                 <marker date="1485061810000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
@@ -319,12 +312,12 @@
       <workItem from="1485060784062" duration="62000" />
       <workItem from="1485061232487" duration="660000" />
       <workItem from="1485063621677" duration="133000" />
-      <workItem from="1485125608994" duration="442000" />
+      <workItem from="1485125608994" duration="1719000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60505000" />
+    <option name="totallyTimeSpent" value="61782000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -762,8 +755,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+        <state relative-caret-position="405">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <marker date="1485061810000" expanded="true" signature="401:452" ph="SELECT * FRO... powerusage" />
             <marker date="1485061810000" expanded="true" signature="510:560" ph="SELECT * FRO... powerusage" />
