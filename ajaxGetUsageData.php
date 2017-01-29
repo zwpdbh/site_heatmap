@@ -6,14 +6,17 @@
  * Time: 10:39 AM
  */
 
-require __DIR__ . '/vendor/autoload.php';
+require_once '/usr/local/share/php-composer/vendor/autoload.php';
+
 use InfluxDB\Client;
+
+
 
 if (isset($_POST['between']) && !empty($_POST['between'])) {
     $between = $_POST['between'];
     $and = $_POST['and'];
 
-    $client = new InfluxDB\Client("influxdb", "8086");
+    $client = new InfluxDB\Client("localhost", "8086");
     $db = $client->selectDB('heatmap');
 
     $upperBound = $db->query('SELECT * FROM powerusage order by time desc LIMIT 1')->getPoints()[0]['time'];
