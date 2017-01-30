@@ -98,12 +98,6 @@ function makeHeatMap(data) {
         })
         .attr("width", function () {
             return block_width;
-        })
-        .on("mouseover", function (d) {
-            mouseOverRect(d["time"]);
-        })
-        .on("mouseout", function () {
-            $('#withinOneHour').css('visibility', 'hidden');
         });
 
     // add axis
@@ -171,15 +165,6 @@ function makeHeatMap(data) {
             .attr("id", "xScaleForDescriptionG")
             .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
             .call(xAxisForDescription);
-    }
-    
-    // when mouseover each rect, draw a svg to show the details during that time.
-    function mouseOverRect(time) {
-        $('#withinOneHour').css('visibility', 'visible');
-        console.log(time);
-        // var svgDetail = d3.select("#withinnOneHour").select("svg");
-        // svgDetail.style("width", 100)
-        //     .style("height", 100);
     }
 
 }
