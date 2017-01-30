@@ -78,7 +78,6 @@ function makeHeatMap(data) {
 
 
     // Begin: SVG
-    svg = d3.select("#demo").select("svg");
     svg.style("width", svgWidth).style("height", svgHeight);
     var colorScale = d3.scaleQuantize().domain([0, maximumUsage]).range(colorbrewer.Reds[9]);
     // draw rect
@@ -87,6 +86,7 @@ function makeHeatMap(data) {
         .data(data)
         .enter()
         .append("rect")
+        .attr('class', 'hourlyData')
         .attr("x", function (d) {
             return xScale(d.x);
         })
@@ -98,6 +98,12 @@ function makeHeatMap(data) {
         })
         .attr("width", function () {
             return block_width;
+        })
+        .on("mouseover", function (d) {
+            mouseOverRect(d["time"]);
+        })
+        .on("mouseout", function () {
+            $('#withinOneHour').css('visibility', 'hidden');
         });
 
     // add axis
@@ -110,7 +116,7 @@ function makeHeatMap(data) {
         .attr("transform", "translate(" + margin + "," + (0) + ")")
         .call(yAxis);
 
-    // rect for description
+    // rect for legend
     svg.append("g")
         .selectAll("rect")
         .data(function () {
@@ -118,6 +124,7 @@ function makeHeatMap(data) {
         })
         .enter()
         .append("rect")
+        .attr('class', 'legend')
         .attr('width', block_width * 2)
         .attr('height', block_height)
         .attr('x', function (d, i) {
@@ -151,11 +158,8 @@ function makeHeatMap(data) {
         $('.title').remove();
         rect.append("title")
             .text(function (d) {
-                console.log('test');
                 return timeFormatToDisplay(d.dateTime) + " : " + parseFloat(d[category]).toFixed(2);
-            }).attr('class', function () {
-            return "title";
-        });
+            }).attr('class', 'title');
 
         // add the description
         var xScaleForDescription = d3.scaleLinear().domain([0, maximumUsage]).range([margin, margin + 9 * block_width * 2]);
@@ -168,5 +172,16 @@ function makeHeatMap(data) {
             .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
             .call(xAxisForDescription);
     }
+    
+    // when mouseover each rect, draw a svg to show the details during that time.
+    function mouseOverRect(time) {
+        $('#withinOneHour').css('visibility', 'visible');
+        console.log(time);
+        // var svgDetail = d3.select("#withinnOneHour").select("svg");
+        // svgDetail.style("width", 100)
+        //     .style("height", 100);
+    }
 
 }
+
+
