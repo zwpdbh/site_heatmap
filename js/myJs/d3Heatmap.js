@@ -7,14 +7,23 @@
 
 function makeHeatMap(data) {
 
-    // setting for variables
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
     var svg = d3.select("#demo").select("svg");
 
+
     var maximumUsage = null;
     var category = "mean_" + "bedroomsAndLounge";
 
+
+    // set the rect size
+    var block_width = 20;
+    var block_height = 20;
+
+    var totalDays = Math.ceil((data.length) / 24);
+
+
+    // pre-process data, to add some attribute on each data
     data[0].dateTime = parseTime(data[0]['time']);
     data[0].day = data[0].dateTime.getDate();
 
@@ -33,21 +42,34 @@ function makeHeatMap(data) {
         data[i].x = indexOfDay;
         data[i].y = data[i].hour;
     }
+    // end of pre-process data
 
-    var totalHours = data.length;
-    var totalDays = Math.ceil(totalHours / 24);
+    // set variables for svg, scales
+    var timeExtent = d3.extent(data, function (d) {
+        return parseTime(d.time);
+    });
+
+
+
+
+
+
+
 
     var margin = 80;
-    var block_width = 20;
-    var block_height = 20;
+    // var margin = {top: 200, right: 40, bottom: 200, left: 40};
+    var hourlyDataAreaWidth = totalDays * block_width;
+    var hourlyDataAreaHeight = 24 * block_height;
+
+
 
     var contentY = [margin, 24 * block_height + margin];
     var contentX = [margin, totalDays * block_width + margin];
     var svgWidth = contentX[1] + margin;
     var svgHeight = contentY[1] + margin;
-    var timeExtent = d3.extent(data, function (d) {
-        return parseTime(d.time);
-    });
+
+
+
 
     var xScale = d3.scaleLinear().domain([1, totalDays]).range(contentX);
     var yScale = d3.scaleLinear().domain([0, 23]).range(contentY);
@@ -82,6 +104,7 @@ function makeHeatMap(data) {
     var colorScale = d3.scaleQuantize().domain([0, maximumUsage]).range(colorbrewer.Reds[9]);
     // draw rect
     var rect = svg.append("g")
+        .attr("class", "hourlyDataRect")
         .selectAll("rect")
         .data(data)
         .enter()
@@ -100,18 +123,39 @@ function makeHeatMap(data) {
             return block_width;
         });
 
+    svg.append("g")
+        .attr("class", "brush")
+        .call(d3.brushX()
+            .extent([[0, 0], contentX]));
+
+    // function brushended() {
+    //     if (!d3.event.sourceEvent) return; // Only transition after input.
+    //     if (!d3.event.selection) return; // Ignore empty selections.
+    //     var d0 = d3.event.selection.map(x.invert),
+    //         d1 = d0.map(d3.timeDay.round);
+    //
+    //     // If empty when rounded, use floor & ceil instead.
+    //     if (d1[0] >= d1[1]) {
+    //         d1[0] = d3.timeDay.floor(d0[0]);
+    //         d1[1] = d3.timeDay.offset(d1[0]);
+    //     }
+    //
+    //     d3.select(this).transition().call(d3.event.target.move, d1.map(x));
+    // }
+
     // add axis
     svg.append("g")
-        .attr("id", "xAxisG")
+        .attr("class", "xAxisG")
         .call(xAxis)
         .attr("transform", "translate(" + 0 + "," + (margin) + ")");
     svg.append("g")
-        .attr("id", "yAxisG")
+        .attr("class", "yAxisG")
         .attr("transform", "translate(" + margin + "," + (0) + ")")
         .call(yAxis);
 
     // rect for legend
     svg.append("g")
+        .attr("class", "legendRect")
         .selectAll("rect")
         .data(function () {
             return colorbrewer.Reds[9];
@@ -160,9 +204,9 @@ function makeHeatMap(data) {
         var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
 
         // add xAxisForDescription
-        $('#xScaleForDescriptionG').remove();
+        $('.xScaleForDescriptionG').remove();
         svg.append("g")
-            .attr("id", "xScaleForDescriptionG")
+            .attr("class", "xScaleForDescriptionG")
             .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
             .call(xAxisForDescription);
     }
