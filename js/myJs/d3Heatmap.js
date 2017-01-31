@@ -259,7 +259,7 @@ function makeAnotherHeatmap(data) {
     // end of setting variables for SVG
 
 
-    // add hourl data into group "hourlyDataRect"
+    // ========= "hourlyDataRect"
     var hourlyUsageCanvas = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -301,6 +301,38 @@ function makeAnotherHeatmap(data) {
         .call(d3.axisLeft(yScale)
             .tickValues(yAxisValues));
 
+    // ====== end of "hourlyDataRect"
+
+
+    // ==== legend part
+    var legendCanvas = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + 0 + ")");
+
+
+    var legendCanvasRectWidth = rectWidth * 4;
+    var legendCanvasWidth = legendCanvasRectWidth * 9;
+    legendCanvas.append("g")
+        .attr("class", "legendRect")
+        .selectAll("rect")
+        .data(function () {
+            return colorbrewer.Reds[9];
+        })
+        .enter()
+        .append("rect")
+        .attr('width', legendCanvasRectWidth)
+        .attr('height', hourlyUsageCanvasHeight / 24)
+        .attr('x', function (d, i) {
+            return margin.left + i * legendCanvasRectWidth;  // the power usage number can be long, so make the rect twice width
+        })
+        .attr('y', margin.top / 3)
+        .style('fill', function (d, i) {
+            return colorbrewer.Reds[9][i];
+        });
+
+
+
+    // ========= end of legend part
+
 
 
     // ------------infomation that need to be redraw
@@ -315,28 +347,27 @@ function makeAnotherHeatmap(data) {
     });
 
     function update() {
-        // fill the color of rect
+        // update the color of rect
         hourlyUsageRect.style("fill", function (d) {
             return colorScale(d[category]);
         });
 
-        // add info on block
+        // update hourly detail info on rect
         $('.title').remove();
         hourlyUsageRect.append("title")
             .text(function (d) {
                 return timeFormatToDisplay(d.dateTime) + " : " + parseFloat(d[category]).toFixed(2);
             }).attr('class', 'title');
 
-        // add the description
-        var xScaleForDescription = d3.scaleLinear().domain([0, maximumUsage]).range([margin, margin + 9 * rectWidth * 2]);
-        var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
 
-        // add xAxisForDescription
+
+        // update the legend Axis
+        var xScaleForDescription = d3.scaleLinear().domain([0, maximumUsage]).range([0, legendCanvasWidth]);
         $('.xScaleForDescriptionG').remove();
-        svg.append("g")
+        legendCanvas.append("g")
+            .attr("transform", "translate(" + margin.left + "," + 25 + ")")
             .attr("class", "xScaleForDescriptionG")
-            .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
-            .call(xAxisForDescription);
+            .call(d3.axisTop(xScaleForDescription).tickSize(0));
     }
 }
 
