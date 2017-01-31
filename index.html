@@ -48,15 +48,17 @@
 <h3>Heatmap for power usage</h3>
 <p>Please select date range to view usage:</p>
 <div class="container">
-    <form id="dateSelctionForm" action="ajaxGetUsageData.php" method="post" onsubmit="return false ">
-        <label for="between">Between</label>
-        <input type="text" id="between" name="between">
 
-        <label for="and">And</label>
-        <input type="text" id="and" name="and">
+    <!--<form style="visibility: hidden" id="dateSelctionForm" action="ajaxGetUsageData.php" method="post" onsubmit="return false ">-->
+        <!--<label for="between">Between</label>-->
+        <!--<input type="text" id="between" name="between">-->
 
-        <input type="submit" value="Submit" id="submit">
-    </form>
+        <!--<label for="and">And</label>-->
+        <!--<input type="text" id="and" name="and">-->
+
+        <!--<input type="submit" value="Submit" id="submit">-->
+    <!--</form>-->
+
     <div id="usageSelection" style="visibility: visible">
         <div>
             <input type="radio" name="selectUsage" value="bedroomsAndLounge" checked class="type">

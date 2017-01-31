@@ -222,11 +222,13 @@ function makeAnotherHeatmap(data) {
 
 
     // set variables for svg, scales
-    var rectWidth = 10;
+
     var margin = {top: 80, left: 80, bottom: 80, right: 80};
 
+    var rectWidth = 10;
     var hourlyUsageCanvasWidth = totalDays * rectWidth;
     var hourlyUsageCanvasHeight = 500 - margin.top - margin.bottom;
+    var rectHeight = hourlyUsageCanvasHeight / 24;
 
     var svg = d3.select("#demo").select("svg")
         .attr("width", function () {
@@ -277,10 +279,10 @@ function makeAnotherHeatmap(data) {
             return yScale(d.y);
         })
         .attr("height", function () {
-            return hourlyUsageCanvasHeight / 24;
+            return rectHeight;
         })
         .attr("width", function () {
-            return hourlyUsageCanvasWidth / totalDays;
+            return rectWidth;
         });
 
     // add axis
@@ -301,6 +303,27 @@ function makeAnotherHeatmap(data) {
         .call(d3.axisLeft(yScale)
             .tickValues(yAxisValues));
 
+    // d3-brush
+    hourlyUsageCanvas.append("g")
+        .attr("class", "brush")
+        .call(d3.brushX()
+            .extent([[0,0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
+            .on("end", brushHourlyUsage));
+
+    function brushHourlyUsage() {
+        if (!d3.event.sourceEvent) return; // Only transition after input.
+        if (!d3.event.selection) return; // Ignore empty selections.
+        var d0 = d3.event.selection.map(xScale.invert),
+            d1 = d0.map(d3.timeDay.round);
+
+        // If empty when rounded, use floor & ceil instead.
+        if (d1[0] >= d1[1]) {
+            d1[0] = d3.timeDay.floor(d0[0]);
+            d1[1] = d3.timeDay.offset(d1[0]);
+        }
+
+        d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
+    }
     // ====== end of "hourlyDataRect"
 
 
