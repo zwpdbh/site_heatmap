@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/d3Brush.html" afterPath="$PROJECT_DIR$/demo/d3Brush.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
     </list>
@@ -42,9 +41,11 @@
           <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="273" column="80" lean-forward="false" selection-start-line="273" selection-start-column="80" selection-end-line="273" selection-end-column="80" />
-                  <folding />
+                <state relative-caret-position="484">
+                  <caret line="350" column="115" lean-forward="false" selection-start-line="350" selection-start-column="115" selection-end-line="350" selection-end-column="115" />
+                  <folding>
+                    <element signature="n#!!block;n#makeHeatMap#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -52,9 +53,10 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="490">
-                  <caret line="89" column="9" lean-forward="false" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
+                <state relative-caret-position="40">
+                  <caret line="59" column="55" lean-forward="false" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
                   <folding>
+                    <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#svg#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                   </folding>
@@ -66,20 +68,20 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1125">
-                  <caret line="112" column="30" lean-forward="false" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="30" />
+                <state relative-caret-position="1020">
+                  <caret line="103" column="93" lean-forward="false" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="93" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="d3Brush.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="d3Brush.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="565">
+                <state relative-caret-position="340">
                   <caret line="48" column="35" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="35" />
                   <folding />
                 </state>
@@ -134,11 +136,13 @@
       <find>xScaleForDescriptionG</find>
       <find>totalHours</find>
       <find>totalDays</find>
-      <find>category</find>
       <find>csv</find>
       <find>group</find>
       <find>svg</find>
       <find>total</find>
+      <find>category</find>
+      <find>timeFormatToDisplay</find>
+      <find>colorScale</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -461,12 +465,12 @@
       <workItem from="1485754430443" duration="2000" />
       <workItem from="1485754440630" duration="3571000" />
       <workItem from="1485808505633" duration="292000" />
-      <workItem from="1485809964925" duration="15099000" />
+      <workItem from="1485809964925" duration="15808000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88312000" />
+    <option name="totallyTimeSpent" value="89021000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -851,30 +855,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="48" column="35" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="89" column="9" lean-forward="false" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
+        <state relative-caret-position="40">
+          <caret line="59" column="55" lean-forward="false" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
           <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#svg#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="48" column="35" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="273" column="80" lean-forward="false" selection-start-line="273" selection-start-column="80" selection-end-line="273" selection-end-column="80" />
-          <folding />
+        <state relative-caret-position="484">
+          <caret line="350" column="115" lean-forward="false" selection-start-line="350" selection-start-column="115" selection-end-line="350" selection-end-column="115" />
+          <folding>
+            <element signature="n#!!block;n#makeHeatMap#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

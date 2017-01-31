@@ -217,12 +217,16 @@ function makeHeatMap(data) {
 function makeAnotherHeatmap(data) {
     // pre-process data, to add some attribute on each data
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+    var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
     data[0].dateTime = parseTime(data[0]['time']);
     data[0].day = data[0].dateTime.getDate();
 
     var currentDay = data[0].day;
     var indexOfDay = 1;
+
+    var maximumUsage = null;
+    var category = "mean_" + "bedroomsAndLounge";
 
     for (var i = 0; i < data.length; i++) {
         data[i].dateTime = parseTime(data[i].time);
@@ -243,10 +247,10 @@ function makeAnotherHeatmap(data) {
 
 
     // set variables for svg, scales
-    var rectHeight = 10;
+    var rectWidth = 10;
     var margin = {top: 80, left: 80, bottom: 80, right: 80};
 
-    var hourlyUsageCanvasWidth = totalDays * rectHeight;
+    var hourlyUsageCanvasWidth = totalDays * rectWidth;
     var hourlyUsageCanvasHeight = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#demo").select("svg")
@@ -259,8 +263,6 @@ function makeAnotherHeatmap(data) {
 
 
 
-
-
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
@@ -268,6 +270,21 @@ function makeAnotherHeatmap(data) {
     var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth]);
     var xScale = d3.scaleLinear().domain([1, totalDays]).range([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
+
+    // get the maximum power usage
+    function getMaxUsageAccordingTo(category) {
+        var usageExtent = d3.extent(data, function (d) {
+            return d[category];
+        });
+        return usageExtent[1];
+    }
+
+    maximumUsage = getMaxUsageAccordingTo(category);
+    var colorScale = d3.scaleQuantize().domain([0, maximumUsage]).range(colorbrewer.Reds[9]);
+    // end of setting variables for SVG
+
+
+
 
     // add hourl data into group "hourlyDataRect"
     var hourlyUsageCanvas = svg.append("g")
@@ -293,6 +310,54 @@ function makeAnotherHeatmap(data) {
             return hourlyUsageCanvasWidth / totalDays;
         });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ------------infomation that need to be redraw
+    update();
+    // ------------infomation that need to be redraw, END
+
+    d3.selectAll('[name = selectUsage]').on('click', function () {
+        category = "mean_" + $('input[name="selectUsage"]:checked').val();
+        maximumUsage = getMaxUsageAccordingTo(category);
+        console.log(category);
+        update();
+    });
+
+    function update() {
+        // fill the color of rect
+        hourlyUsageRect.style("fill", function (d) {
+            return colorScale(d[category]);
+        });
+
+        // add info on block
+        $('.title').remove();
+        hourlyUsageRect.append("title")
+            .text(function (d) {
+                return timeFormatToDisplay(d.dateTime) + " : " + parseFloat(d[category]).toFixed(2);
+            }).attr('class', 'title');
+
+        // add the description
+        var xScaleForDescription = d3.scaleLinear().domain([0, maximumUsage]).range([margin, margin + 9 * rectWidth * 2]);
+        var xAxisForDescription = d3.axisTop(xScaleForDescription).tickSize(0);
+
+        // add xAxisForDescription
+        $('.xScaleForDescriptionG').remove();
+        svg.append("g")
+            .attr("class", "xScaleForDescriptionG")
+            .attr("transform", "translate(" + 0 + "," + (margin / 3) + ")")
+            .call(xAxisForDescription);
+    }
 }
 
 
