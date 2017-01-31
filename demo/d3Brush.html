@@ -35,15 +35,15 @@
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//    svg.append("g")
-//        .attr("class", "axis axis--grid")
-//        .attr("transform", "translate(0," + height + ")")
-//        .call(d3.axisBottom(x)
-//            .ticks(d3.timeHour, 12)
-//            .tickSize(-height)
-//            .tickFormat(function() { return null; }))
-//        .selectAll(".tick")
-//        .classed("tick--minor", function(d) { return d.getHours(); });
+    svg.append("g")
+        .attr("class", "axis axis--grid")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x)
+            .ticks(d3.timeHour, 12)
+            .tickSize(-height)
+            .tickFormat(function() { return null; }))
+        .selectAll(".tick")
+        .classed("tick--minor", function(d) { return d.getHours(); });
 //
 //    svg.append("g")
 //        .attr("class", "axis axis--x")

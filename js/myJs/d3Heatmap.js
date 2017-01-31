@@ -233,29 +233,65 @@ function makeAnotherHeatmap(data) {
             currentDay = data[i].day;
             indexOfDay++;
         }
+        // each data point is arranged by each column is each day
+        // each row is each hour in a day.
         data[i].x = indexOfDay;
         data[i].y = data[i].hour;
     }
+    var totalDays = Math.ceil((data.length) / 24);
     // end of pre-process data
 
 
-
-
-
     // set variables for svg, scales
-    var svg = d3.select("#demo").select("svg");
-    var svgWidth = svg.attr("width");
-    var svgHeight = svg.attr("height");
+    var rectHeight = 10;
+    var margin = {top: 80, left: 80, bottom: 80, right: 80};
 
-    var margin = {top: 200, right: 40, bottom: 200, left: 40};
-    var hourlyDataContentWidth = svgWidth - margin.left - margin.right;
-    var hourlyDataContentHeight = svgHeight - margin.top - margin.bottom;
+    var hourlyUsageCanvasWidth = totalDays * rectHeight;
+    var hourlyUsageCanvasHeight = 500 - margin.top - margin.bottom;
+
+    var svg = d3.select("#demo").select("svg")
+        .attr("width", function () {
+            return hourlyUsageCanvasWidth + margin.left + margin.right;
+        })
+        .attr("height", function () {
+            return hourlyUsageCanvasHeight + margin.top + margin.bottom;
+        });
+
+
+
+
 
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
 
-    var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyDataContentWidth]);
+    var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth]);
+    var xScale = d3.scaleLinear().domain([1, totalDays]).range([0, hourlyUsageCanvasWidth]);
+    var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
+
+    // add hourl data into group "hourlyDataRect"
+    var hourlyUsageCanvas = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var hourlyUsageRect = hourlyUsageCanvas.append("g")
+        .attr("class", "hourlyUsageCanvas")
+        .selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "hourlyUsageRect")
+        .attr("x", function (d) {
+            return xScale(d.x);
+        })
+        .attr("y", function (d) {
+            return yScale(d.y);
+        })
+        .attr("height", function () {
+            return hourlyUsageCanvasHeight / 24;
+        })
+        .attr("width", function () {
+            return hourlyUsageCanvasWidth / totalDays;
+        });
 
 }
 
