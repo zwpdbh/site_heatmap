@@ -50,25 +50,16 @@ function makeHeatMap(data) {
     });
 
 
-
-
-
-
-
-
     var margin = 80;
     // var margin = {top: 200, right: 40, bottom: 200, left: 40};
     var hourlyDataAreaWidth = totalDays * block_width;
     var hourlyDataAreaHeight = 24 * block_height;
 
 
-
     var contentY = [margin, 24 * block_height + margin];
     var contentX = [margin, totalDays * block_width + margin];
     var svgWidth = contentX[1] + margin;
     var svgHeight = contentY[1] + margin;
-
-
 
 
     var xScale = d3.scaleLinear().domain([1, totalDays]).range(contentX);
@@ -79,12 +70,12 @@ function makeHeatMap(data) {
     var xAxis = d3.axisTop(timeScale);
 
 
-    var yAxisScale = d3.scaleLinear().domain([0, 23]).range([contentY[0], contentY[1]]);
+    // var yAxisScale = d3.scaleLinear().domain([0, 23]).range([contentY[0], contentY[1]]);
     var yAxisValues = [];
     for (i = 0; i < 24; i++) {
         yAxisValues.push(i);
     }
-    var yAxis = d3.axisLeft(yAxisScale).tickValues(yAxisValues);
+    var yAxis = d3.axisLeft(yScale).tickValues(yAxisValues);
 
     // get the maximum power usage
     function getMaxUsageAccordingTo(category) {
@@ -96,7 +87,6 @@ function makeHeatMap(data) {
 
     // end of setting variables for SVG
     maximumUsage = getMaxUsageAccordingTo(category);
-
 
 
     // Begin: SVG
@@ -127,21 +117,6 @@ function makeHeatMap(data) {
         .attr("class", "brush")
         .call(d3.brushX()
             .extent([[0, 0], contentX]));
-
-    // function brushended() {
-    //     if (!d3.event.sourceEvent) return; // Only transition after input.
-    //     if (!d3.event.selection) return; // Ignore empty selections.
-    //     var d0 = d3.event.selection.map(x.invert),
-    //         d1 = d0.map(d3.timeDay.round);
-    //
-    //     // If empty when rounded, use floor & ceil instead.
-    //     if (d1[0] >= d1[1]) {
-    //         d1[0] = d3.timeDay.floor(d0[0]);
-    //         d1[1] = d3.timeDay.offset(d1[0]);
-    //     }
-    //
-    //     d3.select(this).transition().call(d3.event.target.move, d1.map(x));
-    // }
 
     // add axis
     svg.append("g")
@@ -176,7 +151,7 @@ function makeHeatMap(data) {
         });
 
     // ------------infomation that need to be redraw
-        update();
+    update();
     // ------------infomation that need to be redraw, END
 
     d3.selectAll('[name = selectUsage]').on('click', function () {
@@ -262,7 +237,6 @@ function makeAnotherHeatmap(data) {
         });
 
 
-
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
@@ -281,9 +255,8 @@ function makeAnotherHeatmap(data) {
 
     maximumUsage = getMaxUsageAccordingTo(category);
     var colorScale = d3.scaleQuantize().domain([0, maximumUsage]).range(colorbrewer.Reds[9]);
+
     // end of setting variables for SVG
-
-
 
 
     // add hourl data into group "hourlyDataRect"
@@ -310,16 +283,23 @@ function makeAnotherHeatmap(data) {
             return hourlyUsageCanvasWidth / totalDays;
         });
 
+    // add axis
+    hourlyUsageCanvas.append("g")
+        .attr("class", "xAxisG")
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .call(d3.axisTop(xTimeScale)
+            .ticks(d3.timeWeek)
+            .tickPadding(5));
 
-
-
-
-
-
-
-
-
-
+    var yAxisValues = [];
+    for (i = 0; i < 24; i++) {
+        yAxisValues.push(i);
+    }
+    hourlyUsageCanvas.append("g")
+        .attr("class", "yAxisG")
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .call(d3.axisLeft(yScale)
+            .tickValues(yAxisValues));
 
 
 

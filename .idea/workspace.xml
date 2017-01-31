@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/d3Brush.html" afterPath="$PROJECT_DIR$/demo/d3Brush.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
     </list>
     <list id="fd42cda0-3470-409e-aa07-883b5c07b5c0" name="Rejected commit: Default" comment="add more interactive function" />
@@ -35,14 +35,14 @@
     <favorites_list name="site_heatmap" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5593705">
+    <splitter split-orientation="horizontal" split-proportion="0.45422032">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="484">
-                  <caret line="350" column="115" lean-forward="false" selection-start-line="350" selection-start-column="115" selection-end-line="350" selection-end-column="115" />
+                <state relative-caret-position="396">
+                  <caret line="293" column="25" lean-forward="true" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
                   <folding>
                     <element signature="n#!!block;n#makeHeatMap#0" expanded="false" />
                   </folding>
@@ -68,21 +68,23 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1020">
-                  <caret line="103" column="93" lean-forward="false" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="93" />
-                  <folding />
+                <state relative-caret-position="379">
+                  <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="128" selection-end-column="21" />
+                  <folding>
+                    <element signature="n#!!block;n#makeAnotherHeatmap#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="d3Brush.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="d3Brush.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="340">
-                  <caret line="48" column="35" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="35" />
+                <state relative-caret-position="460">
+                  <caret line="49" column="57" lean-forward="true" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="57" />
                   <folding />
                 </state>
               </provider>
@@ -143,6 +145,7 @@
       <find>category</find>
       <find>timeFormatToDisplay</find>
       <find>colorScale</find>
+      <find>yScale</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,8 +174,8 @@
         <option value="$PROJECT_DIR$/demo/zoomAndBrush.html" />
         <option value="$PROJECT_DIR$/ajaxGetAllUsageData.php" />
         <option value="$PROJECT_DIR$/ajaxGetUsageData.php" />
-        <option value="$PROJECT_DIR$/demo/d3Brush.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/demo/d3Brush.html" />
         <option value="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
       </list>
     </option>
@@ -465,12 +468,12 @@
       <workItem from="1485754430443" duration="2000" />
       <workItem from="1485754440630" duration="3571000" />
       <workItem from="1485808505633" duration="292000" />
-      <workItem from="1485809964925" duration="15808000" />
+      <workItem from="1485809964925" duration="18098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89021000" />
+    <option name="totallyTimeSpent" value="91311000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -855,14 +858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="48" column="35" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -875,10 +870,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="49" column="57" lean-forward="true" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="350" column="115" lean-forward="false" selection-start-line="350" selection-start-column="115" selection-end-line="350" selection-end-column="115" />
+        <state relative-caret-position="396">
+          <caret line="293" column="25" lean-forward="true" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
           <folding>
             <element signature="n#!!block;n#makeHeatMap#0" expanded="false" />
           </folding>
