@@ -30,6 +30,18 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax('ajaxGetUsageData.php', {
+                type: 'GET',
+                success: function (data) {
+                    var usageData = $.parseJSON(data);
+                    makeAnotherHeatmap(usageData);
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -72,15 +84,10 @@
         </div>
     </div>
 </div>
-<div id="tmp">
-    <p id="testAjax"></p>
-</div>
 
 
-<div class="group">
-    <div id="demo" style="visibility: hidden; height: 700px; width: 800px; overflow: scroll; display: inline-block;" >
-        <svg style="border:1px lightgray solid"></svg>
-    </div>
+<div id="demo" style="visibility: visible;" >
+    <svg style="width: 960px; height: 500px; background-color: aliceblue"></svg>
 </div>
 
 </body>

@@ -10,14 +10,22 @@ require_once '/usr/local/share/php-composer/vendor/autoload.php';
 
 use InfluxDB\Client;
 
+$client = new InfluxDB\Client("localhost", "8086");
+$db = $client->selectDB('heatmap');
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $upperBound = $db->query('SELECT * FROM powerusage order by time desc LIMIT 1')->getPoints()[0]['time'];
+    $lowerBound = $db->query('SELECT * FROM powerusage order by time asc LIMIT 1')->getPoints()[0]['time'];
 
-if (isset($_POST['between']) && !empty($_POST['between'])) {
+    $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
+    $queryString = sprintf($query, $lowerBound, $upperBound);
+
+    $allUsagePoint = $db->query($queryString)->getPoints();
+    echo json_encode($allUsagePoint);
+
+} else if (isset($_POST['between']) && !empty($_POST['between'])) {
     $between = $_POST['between'];
     $and = $_POST['and'];
-
-    $client = new InfluxDB\Client("localhost", "8086");
-    $db = $client->selectDB('heatmap');
 
     $upperBound = $db->query('SELECT * FROM powerusage order by time desc LIMIT 1')->getPoints()[0]['time'];
     $lowerBound = $db->query('SELECT * FROM powerusage order by time asc LIMIT 1')->getPoints()[0]['time'];
@@ -33,7 +41,6 @@ if (isset($_POST['between']) && !empty($_POST['between'])) {
     $usagePoints = $db->query($queryString)->getPoints();
 
     echo json_encode($usagePoints);
-
 } else {
     echo "<p>Ajax Data Failed for period data selection!</p>";
 }

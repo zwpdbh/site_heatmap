@@ -35,31 +35,33 @@
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.append("g")
-        .attr("class", "axis axis--grid")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x)
-            .ticks(d3.timeHour, 12)
-            .tickSize(-height)
-            .tickFormat(function() { return null; }))
-        .selectAll(".tick")
-        .classed("tick--minor", function(d) { return d.getHours(); });
+//    svg.append("g")
+//        .attr("class", "axis axis--grid")
+//        .attr("transform", "translate(0," + height + ")")
+//        .call(d3.axisBottom(x)
+//            .ticks(d3.timeHour, 12)
+//            .tickSize(-height)
+//            .tickFormat(function() { return null; }))
+//        .selectAll(".tick")
+//        .classed("tick--minor", function(d) { return d.getHours(); });
+//
+//    svg.append("g")
+//        .attr("class", "axis axis--x")
+//        .attr("transform", "translate(0," + height + ")")
+//        .call(d3.axisBottom(x)
+//            .ticks(d3.timeDay)
+//            .tickPadding(0))
+//        .attr("text-anchor", null)
+//        .selectAll("text")
+//        .attr("x", 6);
+//
+//    svg.append("g")
+//        .attr("class", "brush")
+//        .call(d3.brushX()
+//            .extent([[0, 0], [width, height]])
+//            .on("end", brushended));
 
-    svg.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x)
-            .ticks(d3.timeDay)
-            .tickPadding(0))
-        .attr("text-anchor", null)
-        .selectAll("text")
-        .attr("x", 6);
 
-    svg.append("g")
-        .attr("class", "brush")
-        .call(d3.brushX()
-            .extent([[0, 0], [width, height]])
-            .on("end", brushended));
 
     function brushended() {
         if (!d3.event.sourceEvent) return; // Only transition after input.

@@ -214,3 +214,49 @@ function makeHeatMap(data) {
 }
 
 
+function makeAnotherHeatmap(data) {
+    // pre-process data, to add some attribute on each data
+    var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+
+    data[0].dateTime = parseTime(data[0]['time']);
+    data[0].day = data[0].dateTime.getDate();
+
+    var currentDay = data[0].day;
+    var indexOfDay = 1;
+
+    for (var i = 0; i < data.length; i++) {
+        data[i].dateTime = parseTime(data[i].time);
+        data[i].hour = data[i].dateTime.getHours();
+        data[i].day = data[i].dateTime.getDate();
+
+        if (currentDay != data[i].day) {
+            currentDay = data[i].day;
+            indexOfDay++;
+        }
+        data[i].x = indexOfDay;
+        data[i].y = data[i].hour;
+    }
+    // end of pre-process data
+
+
+
+
+
+    // set variables for svg, scales
+    var svg = d3.select("#demo").select("svg");
+    var svgWidth = svg.attr("width");
+    var svgHeight = svg.attr("height");
+
+    var margin = {top: 200, right: 40, bottom: 200, left: 40};
+    var hourlyDataContentWidth = svgWidth - margin.left - margin.right;
+    var hourlyDataContentHeight = svgHeight - margin.top - margin.bottom;
+
+    var timeExtent = d3.extent(data, function (d) {
+        return parseTime(d.time);
+    });
+
+    var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyDataContentWidth]);
+
+}
+
+
