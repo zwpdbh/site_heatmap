@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $between = $_POST['between'];
     $and = $_POST['and'];
 
-    $upperBound = $db->query('SELECT * FROM powerusage order by time desc LIMIT 1')->getPoints()[0]['time'];
-    $lowerBound = $db->query('SELECT * FROM powerusage order by time asc LIMIT 1')->getPoints()[0]['time'];
+    $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
+    $lowerBound = $db->query('select first("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
 
     $peroid = getPeriod($upperBound, $lowerBound, $between, $and);
 
