@@ -217,33 +217,35 @@ function makeAnotherHeatmap(data) {
         data[i].x = indexOfDay;
         data[i].y = data[i].hour;
     }
+
     var totalDays = Math.ceil((data.length) / 24);
+    console.log(data.length);
+    console.log(data[data.length - 1].dateTime);
     // end of pre-process data
 
 
     // set variables for svg, scales
 
     var margin = {top: 80, left: 80, bottom: 80, right: 80};
-    var svgHeight = 800;
-    var hourlyUsageRegionHeight = 500
 
-    var rectWidth = 10;
+    var rectWidth = 20;
     var hourlyUsageCanvasWidth = totalDays * rectWidth;
-    var hourlyUsageCanvasHeight = hourlyUsageRegionHeight - margin.top - margin.bottom;
+    var hourlyUsageCanvasHeight = 500 - margin.top - margin.bottom;
     var rectHeight = hourlyUsageCanvasHeight / 24;
 
-    var svg = d3.select("#demo").select("svg")
+    var svg = d3.select("#demo").select("#contextsvg")
         .attr("width", function () {
             return hourlyUsageCanvasWidth + margin.left + margin.right;
         })
         .attr("height", function () {
-            return svgHeight + margin.top + margin.bottom;
+            return hourlyUsageCanvasHeight + margin.top + margin.bottom;
         });
 
 
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
+    console.log(timeExtent);
 
     var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth]);
     var xScale = d3.scaleLinear().domain([1, totalDays]).range([0, hourlyUsageCanvasWidth]);
@@ -287,12 +289,12 @@ function makeAnotherHeatmap(data) {
             return rectWidth;
         });
 
-    // add axis
+    // === add axis
     hourlyUsageCanvas.append("g")
         .attr("class", "xAxisG")
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .call(d3.axisTop(xTimeScale)
-            .ticks(d3.timeWeek)
+            // .ticks(d3.timeYear)
             .tickPadding(5));
 
     var yAxisValues = [];
@@ -306,26 +308,15 @@ function makeAnotherHeatmap(data) {
             .tickValues(yAxisValues));
 
     // d3-brush
-    hourlyUsageCanvas.append("g")
-        .attr("class", "brush")
-        .call(d3.brushX()
-            .extent([[0,0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
-            .on("end", brushHourlyUsage));
+    var brush = d3.brushX()
+        .extent([[0,0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
+        .on("end", brushed);
 
-    function brushHourlyUsage() {
-        if (!d3.event.sourceEvent) return; // Only transition after input.
-        if (!d3.event.selection) return; // Ignore empty selections.
-        var d0 = d3.event.selection.map(xScale.invert),
-            d1 = d0.map(d3.timeDay.round);
+    // hourlyUsageCanvas.append("g")
+    //     .attr("class", "brush")
+    //     .call(brush);
 
-        // If empty when rounded, use floor & ceil instead.
-        if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.floor(d0[0]);
-            d1[1] = d3.timeDay.offset(d1[0]);
-        }
 
-        d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
-    }
     // ====== end of "hourlyDataRect"
 
 
@@ -394,6 +385,39 @@ function makeAnotherHeatmap(data) {
             .attr("class", "xScaleForDescriptionG")
             .call(d3.axisTop(xScaleForDescription).tickSize(0));
     }
+
+
+
+    function brushed() {
+        if (!d3.event.sourceEvent) return; // Only transition after input.
+        if (!d3.event.selection) return; // Ignore empty selections.
+
+        var d0 = d3.event.selection.map(xTimeScale.invert);
+        // console.log(d0);
+        var d1 = d0.map(d3.timeDay.ceil);
+        console.log(d1);
+
+        // If empty when rounded, use floor & ceil instead.
+        // if (d1[0] >= d1[1]) {
+        //     d1[0] = d3.timeDay.floor(d0[0]);
+        //     d1[1] = d3.timeDay.offset(d1[0]);
+        // }
+
+        var position = d1.map(xTimeScale)[0];
+        var shiftValue = rectWidth / 2;
+
+        // var p1 = position[0] - shiftValue;
+        // var p2 = position[1] - shiftValue;
+
+        d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
+        // drawDetail();
+    }
+
+    function drawDetail() {
+        console.log("draw another svg");
+    }
 }
+
+
 
 

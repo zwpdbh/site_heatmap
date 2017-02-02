@@ -14,8 +14,9 @@ $client = new InfluxDB\Client("localhost", "8086");
 $db = $client->selectDB('heatmap');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $upperBound = $db->query('SELECT * FROM powerusage order by time desc LIMIT 1')->getPoints()[0]['time'];
-    $lowerBound = $db->query('SELECT * FROM powerusage order by time asc LIMIT 1')->getPoints()[0]['time'];
+    $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
+    $lowerBound = $db->query('select first("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
+
 
     $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
     $queryString = sprintf($query, $lowerBound, $upperBound);

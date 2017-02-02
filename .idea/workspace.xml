@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajaxGetUsageData.php" afterPath="$PROJECT_DIR$/ajaxGetUsageData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
     </list>
     <list id="fd42cda0-3470-409e-aa07-883b5c07b5c0" name="Rejected commit: Default" comment="add more interactive function" />
@@ -35,16 +37,49 @@
     <favorites_list name="site_heatmap" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5550787">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="495">
-                  <caret line="239" column="28" lean-forward="false" selection-start-line="239" selection-start-column="28" selection-end-line="239" selection-end-column="28" />
+                <state relative-caret-position="-1380">
+                  <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ajaxGetUsageData.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="165">
+                  <caret line="17" column="79" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="79" />
                   <folding>
-                    <element signature="n#!!block;n#makeHeatMap#0" expanded="false" />
+                    <element signature="e#6#87#0#PHP" expanded="true" />
+                    <marker date="1486013946000" expanded="true" signature="341:389" ph="select last(... " />
+                    <marker date="1486013946000" expanded="true" signature="447:496" ph="select first... " />
+                    <marker date="1486013946000" expanded="true" signature="540:622" ph="SELECT mean(... powerusage" />
+                    <marker date="1486013946000" expanded="true" signature="946:997" ph="SELECT * FRO... powerusage" />
+                    <marker date="1486013946000" expanded="true" signature="1055:1105" ph="SELECT * FRO... powerusage" />
+                    <marker date="1486013946000" expanded="true" signature="1216:1298" ph="SELECT mean(... powerusage" />
+                    <marker date="1486013946000" expanded="true" signature="1386:1484" ph="select mean(... powerusage" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="750">
+                  <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="59" selection-end-column="15" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#svg#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#svg#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -53,40 +88,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="d3Brush.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="735">
-                  <caret line="49" column="57" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="57" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ajaxGetUsageData.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
-                  <caret line="42" column="35" lean-forward="false" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
-                  <folding>
-                    <marker date="1485822776000" expanded="true" signature="341:392" ph="SELECT * FRO... powerusage" />
-                    <marker date="1485822776000" expanded="true" signature="450:500" ph="SELECT * FRO... powerusage" />
-                    <marker date="1485822776000" expanded="true" signature="543:625" ph="SELECT mean(... powerusage" />
-                    <marker date="1485822776000" expanded="true" signature="949:1000" ph="SELECT * FRO... powerusage" />
-                    <marker date="1485822776000" expanded="true" signature="1058:1108" ph="SELECT * FRO... powerusage" />
-                    <marker date="1485822776000" expanded="true" signature="1219:1301" ph="SELECT mean(... powerusage" />
-                    <marker date="1485822776000" expanded="true" signature="1389:1487" ph="select mean(... powerusage" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
+        <leaf>
           <file leaf-file-name="zoomAndBrush.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/demo/zoomAndBrush.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="435">
-                  <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+                <state relative-caret-position="-46">
+                  <caret line="70" column="15" lean-forward="false" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="15" />
                   <folding />
                 </state>
               </provider>
@@ -121,6 +128,16 @@
       <find>yScale</find>
       <find>xScaleForDescriptionG</find>
       <find>hourlyUsageCanvasWidth</find>
+      <find>brush end</find>
+      <find>brush</find>
+      <find>Infinity</find>
+      <find>context</find>
+      <find>time</find>
+      <find>xScale</find>
+      <find>x</find>
+      <find>xTimeScale</find>
+      <find>xAxis</find>
+      <find>rect</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,8 +165,8 @@
         <option value="$PROJECT_DIR$/dataForDemo/sp500.csv" />
         <option value="$PROJECT_DIR$/demo/zoomAndBrush.html" />
         <option value="$PROJECT_DIR$/ajaxGetAllUsageData.php" />
-        <option value="$PROJECT_DIR$/ajaxGetUsageData.php" />
         <option value="$PROJECT_DIR$/demo/d3Brush.html" />
+        <option value="$PROJECT_DIR$/ajaxGetUsageData.php" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
       </list>
@@ -207,7 +224,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -296,6 +312,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -445,11 +462,12 @@
       <workItem from="1485808505633" duration="292000" />
       <workItem from="1485809964925" duration="22375000" />
       <workItem from="1485994451114" duration="458000" />
+      <workItem from="1486000474456" duration="9173000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96744000" />
+    <option name="totallyTimeSpent" value="105917000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -764,13 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/myJs/layoutDemo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/phpinfo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -800,56 +811,65 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ajaxGetAllUsageData.php" />
-    <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
+    <entry file="file://$PROJECT_DIR$/js/myJs/layoutDemo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="42" column="35" lean-forward="false" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
-          <folding>
-            <marker date="1485822776000" expanded="true" signature="341:392" ph="SELECT * FRO... powerusage" />
-            <marker date="1485822776000" expanded="true" signature="450:500" ph="SELECT * FRO... powerusage" />
-            <marker date="1485822776000" expanded="true" signature="543:625" ph="SELECT mean(... powerusage" />
-            <marker date="1485822776000" expanded="true" signature="949:1000" ph="SELECT * FRO... powerusage" />
-            <marker date="1485822776000" expanded="true" signature="1058:1108" ph="SELECT * FRO... powerusage" />
-            <marker date="1485822776000" expanded="true" signature="1219:1301" ph="SELECT mean(... powerusage" />
-            <marker date="1485822776000" expanded="true" signature="1389:1487" ph="select mean(... powerusage" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="73" column="12" lean-forward="false" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="75">
+          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/d3Brush.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="57" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="57" />
+        <state relative-caret-position="234">
+          <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/zoomAndBrush.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        <state relative-caret-position="-46">
+          <caret line="70" column="15" lean-forward="false" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="59" selection-end-column="15" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#svg#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#svg#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="239" column="28" lean-forward="false" selection-start-line="239" selection-start-column="28" selection-end-line="239" selection-end-column="28" />
+        <state relative-caret-position="-1380">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" column="79" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="79" />
           <folding>
-            <element signature="n#!!block;n#makeHeatMap#0" expanded="false" />
+            <element signature="e#6#87#0#PHP" expanded="true" />
+            <marker date="1486013946000" expanded="true" signature="341:389" ph="select last(... " />
+            <marker date="1486013946000" expanded="true" signature="447:496" ph="select first... " />
+            <marker date="1486013946000" expanded="true" signature="540:622" ph="SELECT mean(... powerusage" />
+            <marker date="1486013946000" expanded="true" signature="946:997" ph="SELECT * FRO... powerusage" />
+            <marker date="1486013946000" expanded="true" signature="1055:1105" ph="SELECT * FRO... powerusage" />
+            <marker date="1486013946000" expanded="true" signature="1216:1298" ph="SELECT mean(... powerusage" />
+            <marker date="1486013946000" expanded="true" signature="1386:1484" ph="select mean(... powerusage" />
           </folding>
         </state>
       </provider>
