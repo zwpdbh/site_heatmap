@@ -219,8 +219,6 @@ function makeAnotherHeatmap(data) {
     }
 
     var totalDays = Math.ceil((data.length) / 24);
-    console.log(data.length);
-    console.log(data[data.length - 1].dateTime);
     // end of pre-process data
 
 
@@ -245,7 +243,6 @@ function makeAnotherHeatmap(data) {
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
-    console.log(timeExtent);
 
     var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth]);
     var xScale = d3.scaleLinear().domain([1, totalDays]).range([0, hourlyUsageCanvasWidth]);
@@ -312,9 +309,9 @@ function makeAnotherHeatmap(data) {
         .extent([[0,0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
-    // hourlyUsageCanvas.append("g")
-    //     .attr("class", "brush")
-    //     .call(brush);
+    hourlyUsageCanvas.append("g")
+        .attr("class", "brush")
+        .call(brush);
 
 
     // ====== end of "hourlyDataRect"
@@ -395,13 +392,12 @@ function makeAnotherHeatmap(data) {
         var d0 = d3.event.selection.map(xTimeScale.invert);
         // console.log(d0);
         var d1 = d0.map(d3.timeDay.ceil);
-        console.log(d1);
 
         // If empty when rounded, use floor & ceil instead.
-        // if (d1[0] >= d1[1]) {
-        //     d1[0] = d3.timeDay.floor(d0[0]);
-        //     d1[1] = d3.timeDay.offset(d1[0]);
-        // }
+        if (d1[0] >= d1[1]) {
+            d1[0] = d3.timeDay.floor(d0[0]);
+            d1[1] = d3.timeDay.offset(d1[0]);
+        }
 
         var position = d1.map(xTimeScale)[0];
         var shiftValue = rectWidth / 2;
@@ -410,12 +406,43 @@ function makeAnotherHeatmap(data) {
         // var p2 = position[1] - shiftValue;
 
         d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
-        // drawDetail();
+
+        drawDetailBetween(d1);
     }
 
-    function drawDetail() {
-        console.log("draw another svg");
+    function drawDetailBetween(detailRange) {
+
+
+        // ===== svg part for detail
+        var margin = {top: 80, left: 80, bottom: 80, right: 80};
+        var detailSVGWidth = 960;
+        var detailSVGHeight = 500;
+        var detailUsageCanvasHeight = detailSVGHeight - margin.top - margin.bottom;
+        var detailUsageCanvasWidth = detailSVGWidth - margin.left - margin.right;
+
+        var svg = d3.select("#demo").select("#detailsvg")
+            .attr("width", detailSVGWidth)
+            .attr("height", detailSVGHeight);
+
+
+        var detailUsageCanvas = svg.append("g")
+            .attr("class", "detailUsageCanvas")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        // var area = d3.area()
+        //     .curve(d3.curveMonotoneX)
+        //     .x(function (d) {
+        //         return d.dateTime;
+        //     })
+        //     .y0(detailUsageCanvasHeight)
+        //     .y1(function (d) {
+        //         return
+        //     })
+
     }
+
+
 }
 
 
