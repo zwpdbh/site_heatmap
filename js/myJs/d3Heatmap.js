@@ -224,10 +224,12 @@ function makeAnotherHeatmap(data) {
     // set variables for svg, scales
 
     var margin = {top: 80, left: 80, bottom: 80, right: 80};
+    var svgHeight = 800;
+    var hourlyUsageRegionHeight = 500
 
     var rectWidth = 10;
     var hourlyUsageCanvasWidth = totalDays * rectWidth;
-    var hourlyUsageCanvasHeight = 500 - margin.top - margin.bottom;
+    var hourlyUsageCanvasHeight = hourlyUsageRegionHeight - margin.top - margin.bottom;
     var rectHeight = hourlyUsageCanvasHeight / 24;
 
     var svg = d3.select("#demo").select("svg")
@@ -235,7 +237,7 @@ function makeAnotherHeatmap(data) {
             return hourlyUsageCanvasWidth + margin.left + margin.right;
         })
         .attr("height", function () {
-            return hourlyUsageCanvasHeight + margin.top + margin.bottom;
+            return svgHeight + margin.top + margin.bottom;
         });
 
 
