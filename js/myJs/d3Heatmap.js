@@ -411,37 +411,21 @@ function makeAnotherHeatmap(data) {
     }
 
     function drawDetailBetween(detailRange) {
+        var between = detailRange[0];
+        var and = detailRange[1];
 
+        console.log(between);
+        console.log(and);
 
-        // ===== svg part for detail
-        var margin = {top: 80, left: 80, bottom: 80, right: 80};
-        var detailSVGWidth = 960;
-        var detailSVGHeight = 500;
-        var detailUsageCanvasHeight = detailSVGHeight - margin.top - margin.bottom;
-        var detailUsageCanvasWidth = detailSVGWidth - margin.left - margin.right;
-
-        var svg = d3.select("#demo").select("#detailsvg")
-            .attr("width", detailSVGWidth)
-            .attr("height", detailSVGHeight);
-
-
-        var detailUsageCanvas = svg.append("g")
-            .attr("class", "detailUsageCanvas")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-        // var area = d3.area()
-        //     .curve(d3.curveMonotoneX)
-        //     .x(function (d) {
-        //         return d.dateTime;
-        //     })
-        //     .y0(detailUsageCanvasHeight)
-        //     .y1(function (d) {
-        //         return
-        //     })
-
+            $.ajax('../../ajaxGetUsageData.php', {
+                type: 'POST',
+                data: {'between': between, 'and': and, 'tag': "detail"},
+                success: function (data) {
+                    var usageData = $.parseJSON(data);
+                    drawHeatmapForDetail(usageData);
+                }
+            });
     }
-
 
 }
 

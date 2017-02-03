@@ -33,11 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $peroid = getPeriod($upperBound, $lowerBound, $between, $and);
 
-    $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
+    if ($_POST['tag'] == "detail") {
+        $query = "SELECT * FROM powerusage WHERE TIME > '%s' and TIME < '%s'";
+    } else {
+        $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
+    }
 
     $queryString = sprintf($query, $peroid[0], $peroid[1]);
-    $testQueryString = "select mean(*) from powerusage where time > '2015-01-21' and time < '2015-03-15' group by time(1h)";
-
+//    $testQueryString = "select mean(*) from powerusage where time > '2015-01-21' and time < '2015-03-15' group by time(1h)";
     // use test data, change back to $queryString later
     $usagePoints = $db->query($queryString)->getPoints();
 
