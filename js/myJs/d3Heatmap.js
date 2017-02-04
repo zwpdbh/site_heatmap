@@ -191,8 +191,10 @@ var selectedType = null;
 
 
 function makeAnotherHeatmap(data) {
+
     // pre-process data, to add some attribute on each data
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+    var getWhichDay = d3.timeParse("%Y-%m-%d");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
     var indexOfDay = 1;
@@ -202,6 +204,7 @@ function makeAnotherHeatmap(data) {
         data[i].dateTime = parseTime(data[i].time);
         data[i].hour = data[i].dateTime.getHours();
         data[i].day = data[i].dateTime.getDate();
+        data[i].whichDay = getWhichDay(data[i].time.slice(0, 10));
 
         if (currentDay != data[i].day) {
             currentDay = data[i].day;
@@ -243,19 +246,13 @@ function makeAnotherHeatmap(data) {
 
 
     var timeExtent = d3.extent(data, function (d) {
-        return parseTime(d.time);
+        return d.whichDay;
     });
 
-    // console.log(d3.time.interval.floor(data[0].dateTime));
-    var test = d3.timeDay.count(parseTime(data[0].time), parseTime(data[data.length - 1].time));
-    console.log(test);
 
-    var timeDomain = d3.timeDay.range(data[0].dateTime, data[data.length - 1].dateTime);
-    console.log(timeDomain);
-    console.log(timeExtent);
 
-    var xTimeScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
-    var xScale = d3.scaleLinear().domain([1, totalDays]).rangeRound([0, hourlyUsageCanvasWidth]);
+
+    var xScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
 
     // get the maximum power usage
@@ -284,7 +281,7 @@ function makeAnotherHeatmap(data) {
         .append("rect")
         .attr("class", "hourlyUsageRect")
         .attr("x", function (d) {
-            return xScale(d.x);
+            return xScale(d.whichDay);
         })
         .attr("y", function (d) {
             return yScale(d.y);
@@ -299,8 +296,8 @@ function makeAnotherHeatmap(data) {
     // === add axis
     hourlyUsageCanvas.append("g")
         .attr("class", "xAxisG")
-        .attr("transform", "translate(" + 0 + "," + hourlyUsageCanvasHeight + ")")
-        .call(d3.axisTop(xTimeScale)
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .call(d3.axisTop(xScale)
         .ticks(d3.timeDay)
             .tickPadding(5));
 
@@ -308,11 +305,11 @@ function makeAnotherHeatmap(data) {
     for (i = 0; i < 24; i++) {
         yAxisValues.push(i);
     }
-    // hourlyUsageCanvas.append("g")
-    //     .attr("class", "yAxisG")
-    //     .attr("transform", "translate(" + 0 + "," + 0 + ")")
-    //     .call(d3.axisLeft(yScale)
-    //         .tickValues(yAxisValues));
+    hourlyUsageCanvas.append("g")
+        .attr("class", "yAxisG")
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .call(d3.axisLeft(yScale)
+            .tickValues(yAxisValues));
 
     // d3-brush
     var brush = d3.brushX()
@@ -409,8 +406,7 @@ function makeAnotherHeatmap(data) {
         if (!d3.event.sourceEvent) return; // Only transition after input.
         if (!d3.event.selection) return; // Ignore empty selections.
 
-        var d0 = d3.event.selection.map(xTimeScale.invert);
-        console.log(d0);
+        var d0 = d3.event.selection.map(xScale.invert);
         var d1 = d0.map(d3.timeDay);
 
         // If empty when rounded, use floor & ceil instead.
@@ -419,17 +415,16 @@ function makeAnotherHeatmap(data) {
             d1[1] = d3.timeDay.offset(d1[0]);
         }
 
-        var position = d1.map(xTimeScale)[0];
+        var position = d1.map(xScale)[0];
         var shiftValue = rectWidth / 2;
 
         // var p1 = position[0] - shiftValue;
         // var p2 = position[1] - shiftValue;
 
-        d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
-        console.log(d1.map(xTimeScale));
+        d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
 
-        // var p0 = xTimeScale(d1[0]) - rectWidth / 2;
-        // var p1 = xTimeScale(d1[1]) - rectWidth / 2;
+        // var p0 = xScale(d1[0]) - rectWidth / 2;
+        // var p1 = xScale(d1[1]) - rectWidth / 2;
         // var distance = p1 - p0;
         // console.log(p0, p1);
         // if (p0 < 0 ) {
@@ -447,6 +442,7 @@ function makeAnotherHeatmap(data) {
     function drawDetailBetween(detailRange) {
         var between = detailRange[0];
         var and = detailRange[1];
+        console.log(between, and);
 
         $.ajax('../../ajaxGetUsageData.php', {
             type: 'POST',
