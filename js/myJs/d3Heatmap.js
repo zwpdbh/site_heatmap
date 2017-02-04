@@ -407,33 +407,27 @@ function makeAnotherHeatmap(data) {
         if (!d3.event.selection) return; // Ignore empty selections.
 
         var d0 = d3.event.selection.map(xScale.invert);
-        // console.log(d0);
         var d1 = d0.map(d3.timeDay);
-        console.log(d1);
+        // console.log(d0, d1);
 
         // If empty when rounded, use floor & ceil instead.
-        // if (d1[0] >= d1[1]) {
-        //     d1[0] = d3.timeDay.ceil(d0[0]);
-        //     d1[1] = d3.timeDay.offset(d1[0]);
-        // }
-        //
-        d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
+        if (d1[0] >= d1[1]) {
+            d1[0] = d3.timeDay.ceil(d0[0]);
+            d1[1] = d3.timeDay.offset(d1[0]);
+        }
 
+        d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
         drawDetailBetween(d1);
     }
 
-    function drawDetailBetween(detailRange) {
-        var between = detailRange[0];
-        var and = detailRange[1];
-        console.log(between, and);
-
+    function drawDetailBetween(selection) {
         $.ajax('../../ajaxGetUsageData.php', {
             type: 'POST',
-            data: {'between': between, 'and': and, 'tag': "detail"},
+            data: {'tag': "detail", "selection": selection},
             success: function (data) {
-                // var usageData = $.parseJSON(data);
-                // drawHeatmapForDetail(usageData);
-                $('.container').append(data);
+                var usageData = $.parseJSON(data);
+                drawHeatmapForDetail(usageData);
+                // $('.container').append(data);
             }
         });
     }

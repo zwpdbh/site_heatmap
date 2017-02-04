@@ -25,30 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $allUsagePoint = $db->query($testQueryString)->getPoints();
     echo json_encode($allUsagePoint);
+} else if (isset($_POST['tag']) && !empty($_POST['tag'])) {
+    $selection = $_POST['selection'];
 
-} else if (isset($_POST['between']) && !empty($_POST['between'])) {
-    $between = $_POST['between'];
-    $and = $_POST['and'];
+    $start = date("Y-m-d", strtotime(substr($selection[0], 0, 15)));
+    $end = date("Y-m-d", strtotime(substr($selection[1], 0, 15)));
 
-    $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
-    $lowerBound = $db->query('select first("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
+    $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME < '%s'";
 
-    $peroid = getPeriod($upperBound, $lowerBound, $between, $and);
-
-    // if the get tag == "detail", then query with precision with every mins
-    if ($_POST['tag'] == "detail") {
-        $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME <= '%s'";
-
-    } else {
-        $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
-    }
-
-    $queryString = sprintf($query, $between, $and);
-    echo $queryString;
-    echo "<br>";
+    $queryString = sprintf($query, $start, $end);
     $usagePoints = $db->query($queryString)->getPoints();
 
-//    echo json_encode($usagePoints);
+    echo json_encode($usagePoints);
 } else {
     echo "<p>Ajax Data Failed for period data selection!</p>";
 }
