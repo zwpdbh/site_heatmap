@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
     }
 
-    $queryString = sprintf($query, $peroid[0], $peroid[1]);
+    $queryString = sprintf($query, $between, $and);
     echo $queryString;
     echo "<br>";
     $usagePoints = $db->query($queryString)->getPoints();
