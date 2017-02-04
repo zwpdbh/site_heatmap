@@ -13,15 +13,17 @@ use InfluxDB\Client;
 $client = new InfluxDB\Client("localhost", "8086");
 $db = $client->selectDB('heatmap');
 
+$testQueryString = "select mean(*) from powerusage where time >= '2014-07-14' and time < '2014-07-18' group by time(1h)";
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
     $lowerBound = $db->query('select first("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
 
 
-    $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
+    $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
     $queryString = sprintf($query, $lowerBound, $upperBound);
 
-    $allUsagePoint = $db->query($queryString)->getPoints();
+    $allUsagePoint = $db->query($testQueryString)->getPoints();
     echo json_encode($allUsagePoint);
 
 } else if (isset($_POST['between']) && !empty($_POST['between'])) {
@@ -36,12 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($_POST['tag'] == "detail") {
         $query = "SELECT * FROM powerusage WHERE TIME > '%s' and TIME < '%s'";
     } else {
-        $query = "SELECT mean(*) FROM powerusage WHERE TIME > '%s' and TIME < '%s' GROUP BY TIME(1h)";
+        $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
     }
 
     $queryString = sprintf($query, $peroid[0], $peroid[1]);
-//    $testQueryString = "select mean(*) from powerusage where time > '2015-01-21' and time < '2015-03-15' group by time(1h)";
-    // use test data, change back to $queryString later
     $usagePoints = $db->query($queryString)->getPoints();
 
     echo json_encode($usagePoints);

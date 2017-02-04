@@ -246,6 +246,14 @@ function makeAnotherHeatmap(data) {
         return parseTime(d.time);
     });
 
+    // console.log(d3.time.interval.floor(data[0].dateTime));
+    var test = d3.timeDay.count(parseTime(data[0].time), parseTime(data[data.length - 1].time));
+    console.log(test);
+
+    var timeDomain = d3.timeDay.range(data[0].dateTime, data[data.length - 1].dateTime);
+    console.log(timeDomain);
+    console.log(timeExtent);
+
     var xTimeScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
     var xScale = d3.scaleLinear().domain([1, totalDays]).rangeRound([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
