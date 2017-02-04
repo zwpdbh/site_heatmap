@@ -3,6 +3,7 @@
  */
 
 function drawHeatmapForDetail(data) {
+    console.log(data.length);
    $('.detailUsageCanvas').remove();
 
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");

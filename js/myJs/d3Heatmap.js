@@ -293,7 +293,7 @@ function makeAnotherHeatmap(data) {
         .attr("class", "xAxisG")
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .call(d3.axisTop(xTimeScale)
-            // .ticks(d3.timeYear)
+        // .ticks(d3.timeYear)
             .tickPadding(5));
 
     var yAxisValues = [];
@@ -308,7 +308,7 @@ function makeAnotherHeatmap(data) {
 
     // d3-brush
     var brush = d3.brushX()
-        .extent([[0,0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
+        .extent([[0, 0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
@@ -345,9 +345,7 @@ function makeAnotherHeatmap(data) {
         });
 
 
-
     // ========= end of legend part
-
 
 
     // ------------infomation that need to be redraw
@@ -376,7 +374,6 @@ function makeAnotherHeatmap(data) {
             }).attr('class', 'title');
 
 
-
         // update the legend Axis
         var xScaleForDescription = d3.scaleLinear().domain([0, maximumUsage]).range([0, legendCanvasWidth]);
         $('.xScaleForDescriptionG').remove();
@@ -386,7 +383,6 @@ function makeAnotherHeatmap(data) {
             .call(d3.axisTop(xScaleForDescription).tickSize(0));
 
     }
-
 
 
     function brushed() {
@@ -417,17 +413,14 @@ function makeAnotherHeatmap(data) {
         var between = detailRange[0];
         var and = detailRange[1];
 
-        console.log(between);
-        console.log(and);
-
-            $.ajax('../../ajaxGetUsageData.php', {
-                type: 'POST',
-                data: {'between': between, 'and': and, 'tag': "detail"},
-                success: function (data) {
-                    var usageData = $.parseJSON(data);
-                    drawHeatmapForDetail(usageData);
-                }
-            });
+        $.ajax('../../ajaxGetUsageData.php', {
+            type: 'POST',
+            data: {'between': between, 'and': and, 'tag': "detail"},
+            success: function (data) {
+                var usageData = $.parseJSON(data);
+                drawHeatmapForDetail(usageData);
+            }
+        });
     }
 
 }
