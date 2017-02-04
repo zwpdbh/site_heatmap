@@ -245,9 +245,9 @@ function makeAnotherHeatmap(data) {
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
-
+    console.log(timeExtent);
     var xTimeScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
-    var xScale = d3.scaleLinear().domain([1, totalDays]).range([0, hourlyUsageCanvasWidth]);
+    var xScale = d3.scaleLinear().domain([1, totalDays]).rangeRound([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
 
     // get the maximum power usage
@@ -293,7 +293,7 @@ function makeAnotherHeatmap(data) {
         .attr("class", "xAxisG")
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .call(d3.axisTop(xTimeScale)
-        // .ticks(d3.timeYear)
+        .ticks(d3.timeWeek)
             .tickPadding(5));
 
     var yAxisValues = [];
@@ -385,17 +385,29 @@ function makeAnotherHeatmap(data) {
     }
 
 
+    // For auto-redraw so that the focus of a 1D brush matches the graphed domain, you need to do as follows:
+    //
+    // (1) Apply the brush scale to the graphed domain (i.e., the brush extent) --> store in var brushExtent; (units: pixels)
+    // (2) Within the brush element (class=`'brush'`), select the `` with class=`'extent'`.
+    // (3) If the brush is horizontal (i.e., for the x-axis), set the 'x' attribute to the first value in brushExtent. This moves the start position of the focus `` to match the graphed domain. If the brush is vertical (i.e., for the y-axis), set the `'y'` attribute to the second value in brushExtent.
+    // (4) Next, set the 'width' attribute of the extent to `brushExtent[1] - brushExtent[0]`. The end of the brush focus is `brushExtent[1]`, but the length of the focus is this minus the offset introduced by `brushExtent[0]`. (If a y-axis brush, switch [0] and [1]).
+    //
+    //     (*) The extent should now programmatically match the graphed domain.
+    //
+    //         I use this procedure as part of a resize function. Hope this works.
+
+
     function brushed() {
         if (!d3.event.sourceEvent) return; // Only transition after input.
         if (!d3.event.selection) return; // Ignore empty selections.
 
         var d0 = d3.event.selection.map(xTimeScale.invert);
-        // console.log(d0);
-        var d1 = d0.map(d3.timeDay.ceil);
+        console.log(d0);
+        var d1 = d0.map(d3.timeDay);
 
         // If empty when rounded, use floor & ceil instead.
         if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.floor(d0[0]);
+            d1[0] = d3.timeDay.ceil(d0[0]);
             d1[1] = d3.timeDay.offset(d1[0]);
         }
 
@@ -405,7 +417,21 @@ function makeAnotherHeatmap(data) {
         // var p1 = position[0] - shiftValue;
         // var p2 = position[1] - shiftValue;
 
-        d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
+        // d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
+        // console.log(d1.map(xTimeScale));
+        var p0 = xTimeScale(d1[0]) - rectWidth / 2;
+        var p1 = xTimeScale(d1[1]) - rectWidth / 2;
+        var distance = p1 - p0;
+        console.log(p0, p1);
+        if (p0 < 0 ) {
+            p0 = 0;
+            p1 = distance;
+        }
+        if (distance > rectWidth * 7) {
+            p1 = p0 + rectWidth * 7;
+        }
+        d3.select(this).transition().call(d3.event.target.move, [p0, p1]);
+
         drawDetailBetween(d1);
     }
 
