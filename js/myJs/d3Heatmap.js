@@ -313,7 +313,7 @@ function makeAnotherHeatmap(data) {
 
     // d3-brush
     var brush = d3.brushX()
-        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth * 2, hourlyUsageCanvasHeight + rectHeight]])
+        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
@@ -408,7 +408,7 @@ function makeAnotherHeatmap(data) {
 
         var d0 = d3.event.selection.map(xScale.invert);
         var d1 = d0.map(d3.timeDay);
-        // console.log(d0, d1);
+        console.log(d0, d1);
 
         // If empty when rounded, use floor & ceil instead.
         if (d1[0] >= d1[1]) {
