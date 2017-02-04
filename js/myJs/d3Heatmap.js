@@ -246,7 +246,7 @@ function makeAnotherHeatmap(data) {
         return parseTime(d.time);
     });
 
-    var xTimeScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth]);
+    var xTimeScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
     var xScale = d3.scaleLinear().domain([1, totalDays]).range([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
 

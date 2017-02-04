@@ -7,7 +7,8 @@ function drawHeatmapForDetail(data) {
    $('.detailUsageCanvas').remove();
 
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
-
+    // var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
+    
     var marginForDetail = {top: 80, left: 80, bottom: 80, right: 80};
     var detailSVGWidth = 960;
     var detailSVGHeight = 500;
@@ -53,7 +54,7 @@ function drawHeatmapForDetail(data) {
     detailUsageCanvas.append("g")
         .attr("class", "xAxisG")
         .attr("transform", "translate(0," + detailUsageCanvasHeight + ")")
-        .call(d3.axisBottom(xTimeScale));
+        .call(d3.axisBottom(xTimeScale).ticks(d3.timeHour));
 
     detailUsageCanvas.append("g")
         .attr("class", "yAxisG")
