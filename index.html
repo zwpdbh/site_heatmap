@@ -11,26 +11,26 @@
     <script src="js/supportingJs/colorbrewer.js"></script>
     <script src="js/myJs/d3Heatmap.js"></script>
     <script src="js/myJs/d3HeatmapForDetail.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#submit').on('click', function () {
-                var between = $('#between').val();
-                var and = $('#and').val();
-                if (between && and) {
-                    $.ajax('ajaxGetUsageData.php', {
-                        type: 'POST',
-                        data: {'between': between, 'and': and},
-                        success: function (data) {
-                            var usageData = $.parseJSON(data);
-                            $('#demo').css('visibility', 'visible');
-                            $('#usageSelection').css('visibility', 'visible');
-                            makeHeatMap(usageData);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    <!--<script>-->
+        <!--$(document).ready(function () {-->
+            <!--$('#submit').on('click', function () {-->
+                <!--var between = $('#between').val();-->
+                <!--var and = $('#and').val();-->
+                <!--if (between && and) {-->
+                    <!--$.ajax('ajaxGetUsageData.php', {-->
+                        <!--type: 'POST',-->
+                        <!--data: {'between': between, 'and': and},-->
+                        <!--success: function (data) {-->
+                            <!--var usageData = $.parseJSON(data);-->
+                            <!--$('#demo').css('visibility', 'visible');-->
+                            <!--$('#usageSelection').css('visibility', 'visible');-->
+                            <!--makeHeatMap(usageData);-->
+                        <!--}-->
+                    <!--});-->
+                <!--}-->
+            <!--});-->
+        <!--});-->
+    <!--</script>-->
 
     <script>
         $(document).ready(function () {
