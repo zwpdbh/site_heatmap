@@ -195,15 +195,8 @@ function makeAnotherHeatmap(data) {
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
-    data[0].dateTime = parseTime(data[0]['time']);
-    data[0].day = data[0].dateTime.getDate();
-
-    var currentDay = data[0].day;
     var indexOfDay = 1;
-
-    var maximumUsage = null;
-    selectedType = "bedroomsAndLounge"
-    var category = "mean_" + selectedType;
+    var currentDay = parseTime(data[0].time).getDate();
 
     for (var i = 0; i < data.length; i++) {
         data[i].dateTime = parseTime(data[i].time);
@@ -220,7 +213,12 @@ function makeAnotherHeatmap(data) {
         data[i].y = data[i].hour;
     }
 
-    var totalDays = Math.ceil((data.length) / 24);
+    // var totalDays = Math.ceil((data.length) / 24); wrong !
+    var totalDays = indexOfDay;
+
+    var maximumUsage = null;
+    selectedType = "bedroomsAndLounge";
+    var category = "mean_" + selectedType;
     // end of pre-process data
 
 
@@ -228,24 +226,26 @@ function makeAnotherHeatmap(data) {
 
     var margin = {top: 80, left: 80, bottom: 80, right: 80};
 
-    var rectWidth = 20;
-    var hourlyUsageCanvasWidth = totalDays * rectWidth;
-    var hourlyUsageCanvasHeight = 500 - margin.top - margin.bottom;
+    var rectWidth = 40;
+    var svgHeight = 500;
+    var svgWidth = margin.left + totalDays * rectWidth + margin.right;
+    var hourlyUsageCanvasWidth = svgWidth - margin.left - margin.right;
+    var hourlyUsageCanvasHeight = svgHeight - margin.top - margin.bottom;
     var rectHeight = hourlyUsageCanvasHeight / 24;
 
     var svg = d3.select("#demo").select("#contextsvg")
         .attr("width", function () {
-            return hourlyUsageCanvasWidth + margin.left + margin.right;
+            return svgWidth;
         })
         .attr("height", function () {
-            return hourlyUsageCanvasHeight + margin.top + margin.bottom;
+            return svgHeight;
         });
 
 
     var timeExtent = d3.extent(data, function (d) {
         return parseTime(d.time);
     });
-    console.log(timeExtent);
+
     var xTimeScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
     var xScale = d3.scaleLinear().domain([1, totalDays]).rangeRound([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
@@ -291,24 +291,24 @@ function makeAnotherHeatmap(data) {
     // === add axis
     hourlyUsageCanvas.append("g")
         .attr("class", "xAxisG")
-        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+        .attr("transform", "translate(" + 0 + "," + hourlyUsageCanvasHeight + ")")
         .call(d3.axisTop(xTimeScale)
-        .ticks(d3.timeWeek)
+        .ticks(d3.timeDay)
             .tickPadding(5));
 
     var yAxisValues = [];
     for (i = 0; i < 24; i++) {
         yAxisValues.push(i);
     }
-    hourlyUsageCanvas.append("g")
-        .attr("class", "yAxisG")
-        .attr("transform", "translate(" + 0 + "," + 0 + ")")
-        .call(d3.axisLeft(yScale)
-            .tickValues(yAxisValues));
+    // hourlyUsageCanvas.append("g")
+    //     .attr("class", "yAxisG")
+    //     .attr("transform", "translate(" + 0 + "," + 0 + ")")
+    //     .call(d3.axisLeft(yScale)
+    //         .tickValues(yAxisValues));
 
     // d3-brush
     var brush = d3.brushX()
-        .extent([[0, 0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
+        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
@@ -417,20 +417,21 @@ function makeAnotherHeatmap(data) {
         // var p1 = position[0] - shiftValue;
         // var p2 = position[1] - shiftValue;
 
-        // d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
-        // console.log(d1.map(xTimeScale));
-        var p0 = xTimeScale(d1[0]) - rectWidth / 2;
-        var p1 = xTimeScale(d1[1]) - rectWidth / 2;
-        var distance = p1 - p0;
-        console.log(p0, p1);
-        if (p0 < 0 ) {
-            p0 = 0;
-            p1 = distance;
-        }
-        if (distance > rectWidth * 7) {
-            p1 = p0 + rectWidth * 7;
-        }
-        d3.select(this).transition().call(d3.event.target.move, [p0, p1]);
+        d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
+        console.log(d1.map(xTimeScale));
+
+        // var p0 = xTimeScale(d1[0]) - rectWidth / 2;
+        // var p1 = xTimeScale(d1[1]) - rectWidth / 2;
+        // var distance = p1 - p0;
+        // console.log(p0, p1);
+        // if (p0 < 0 ) {
+        //     p0 = 0;
+        //     p1 = distance;
+        // }
+        // if (distance > rectWidth * 7) {
+        //     p1 = p0 + rectWidth * 7;
+        // }
+        // d3.select(this).transition().call(d3.event.target.move, [p0, p1]);
 
         drawDetailBetween(d1);
     }
