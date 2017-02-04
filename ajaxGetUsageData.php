@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $queryString = sprintf($query, $start, $end);
     $usagePoints = $db->query($queryString)->getPoints();
-
+//    print_r(count($usagePoints));
+//    echo "<br>";
     echo json_encode($usagePoints);
 } else {
     echo "<p>Ajax Data Failed for period data selection!</p>";
