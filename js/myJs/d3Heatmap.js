@@ -4,6 +4,7 @@
 
 // event for select radio button
 
+var selectedType = null;
 
 function makeHeatMap(data) {
 
@@ -201,7 +202,8 @@ function makeAnotherHeatmap(data) {
     var indexOfDay = 1;
 
     var maximumUsage = null;
-    var category = "mean_" + "bedroomsAndLounge";
+    selectedType = "bedroomsAndLounge"
+    var category = "mean_" + selectedType;
 
     for (var i = 0; i < data.length; i++) {
         data[i].dateTime = parseTime(data[i].time);
@@ -353,7 +355,8 @@ function makeAnotherHeatmap(data) {
     // ------------infomation that need to be redraw, END
 
     d3.selectAll('[name = selectUsage]').on('click', function () {
-        category = "mean_" + $('input[name="selectUsage"]:checked').val();
+        selectedType = $('input[name="selectUsage"]:checked').val();
+        category = "mean_" + selectedType;
         maximumUsage = getMaxUsageAccordingTo(category);
         console.log(category);
         update();
@@ -381,6 +384,7 @@ function makeAnotherHeatmap(data) {
             .attr("transform", "translate(" + margin.left + "," + 25 + ")")
             .attr("class", "xScaleForDescriptionG")
             .call(d3.axisTop(xScaleForDescription).tickSize(0));
+
     }
 
 
@@ -406,7 +410,6 @@ function makeAnotherHeatmap(data) {
         // var p2 = position[1] - shiftValue;
 
         d3.select(this).transition().call(d3.event.target.move, d1.map(xTimeScale));
-
         drawDetailBetween(d1);
     }
 
