@@ -448,8 +448,9 @@ function makeAnotherHeatmap(data) {
             type: 'POST',
             data: {'between': between, 'and': and, 'tag': "detail"},
             success: function (data) {
-                var usageData = $.parseJSON(data);
-                drawHeatmapForDetail(usageData);
+                // var usageData = $.parseJSON(data);
+                // drawHeatmapForDetail(usageData);
+                $('.container').append(data);
             }
         });
     }

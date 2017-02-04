@@ -35,16 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $peroid = getPeriod($upperBound, $lowerBound, $between, $and);
 
+    // if the get tag == "detail", then query with precision with every mins
     if ($_POST['tag'] == "detail") {
-        $query = "SELECT * FROM powerusage WHERE TIME > '%s' and TIME < '%s'";
+        $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME < '%s'";
+
     } else {
         $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
     }
 
     $queryString = sprintf($query, $peroid[0], $peroid[1]);
+    echo $queryString;
+    echo "<br>";
     $usagePoints = $db->query($queryString)->getPoints();
 
-    echo json_encode($usagePoints);
+//    echo json_encode($usagePoints);
 } else {
     echo "<p>Ajax Data Failed for period data selection!</p>";
 }
