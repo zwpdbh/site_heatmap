@@ -56,7 +56,8 @@ function drawHeatmapForDetail(data) {
         .call(d3.axisBottom(xTimeScale));
 
     detailUsageCanvas.append("g")
-        .attr("class", "xAxisG")
+        .attr("class", "yAxisG")
+        .call(d3.axisLeft(yScale))
         .append("text")
         .attr("fill", "#000")
         .attr("transform", "rotate(-90)")
