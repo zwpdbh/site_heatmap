@@ -313,7 +313,7 @@ function makeAnotherHeatmap(data) {
 
     // d3-brush
     var brush = d3.brushX()
-        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
+        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth * 2, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
@@ -407,34 +407,17 @@ function makeAnotherHeatmap(data) {
         if (!d3.event.selection) return; // Ignore empty selections.
 
         var d0 = d3.event.selection.map(xScale.invert);
+        // console.log(d0);
         var d1 = d0.map(d3.timeDay);
+        console.log(d1);
 
         // If empty when rounded, use floor & ceil instead.
-        if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.ceil(d0[0]);
-            d1[1] = d3.timeDay.offset(d1[0]);
-        }
-
-        var position = d1.map(xScale)[0];
-        var shiftValue = rectWidth / 2;
-
-        // var p1 = position[0] - shiftValue;
-        // var p2 = position[1] - shiftValue;
-
+        // if (d1[0] >= d1[1]) {
+        //     d1[0] = d3.timeDay.ceil(d0[0]);
+        //     d1[1] = d3.timeDay.offset(d1[0]);
+        // }
+        //
         d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
-
-        // var p0 = xScale(d1[0]) - rectWidth / 2;
-        // var p1 = xScale(d1[1]) - rectWidth / 2;
-        // var distance = p1 - p0;
-        // console.log(p0, p1);
-        // if (p0 < 0 ) {
-        //     p0 = 0;
-        //     p1 = distance;
-        // }
-        // if (distance > rectWidth * 7) {
-        //     p1 = p0 + rectWidth * 7;
-        // }
-        // d3.select(this).transition().call(d3.event.target.move, [p0, p1]);
 
         drawDetailBetween(d1);
     }

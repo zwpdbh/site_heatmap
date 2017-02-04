@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // if the get tag == "detail", then query with precision with every mins
     if ($_POST['tag'] == "detail") {
-        $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME < '%s'";
+        $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME <= '%s'";
 
     } else {
         $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
