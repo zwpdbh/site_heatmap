@@ -4,10 +4,9 @@
 
 // event for select radio button
 
-var selectedType = null;
+var selectedType = "";
 
-function makeAnotherHeatmap(data) {
-
+function makeHeatmapForHourlyData(data) {
     // pre-process data, to add some attribute on each data
     var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var getWhichDay = d3.timeParse("%Y-%m-%d");
@@ -52,7 +51,11 @@ function makeAnotherHeatmap(data) {
     var hourlyUsageCanvasHeight = svgHeight - margin.top - margin.bottom;
     var rectHeight = hourlyUsageCanvasHeight / 24;
 
-    var svg = d3.select("#demo").select("#contextsvg")
+
+    var svg = d3.select("#hourlyDataSVGContainer")
+        .append("svg")
+        .attr("id", "svgForHourlyData")
+        .style("background-color", "aliceblue")
         .attr("width", function () {
             return svgWidth;
         })
@@ -87,6 +90,7 @@ function makeAnotherHeatmap(data) {
 
     // ========= "hourlyDataRect"
     var hourlyUsageCanvas = svg.append("g")
+        .attr("class", "hourlyUsageCanvas")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var hourlyUsageRect = hourlyUsageCanvas.append("g")
@@ -180,6 +184,11 @@ function makeAnotherHeatmap(data) {
         update();
     });
 
+    $('#selectionForyear').on('change', function () {
+        var selectedYear = $(this).val();
+        getSelectionRange(selectedYear);
+    });
+
     function update() {
         // update the color of rect
         hourlyUsageRect.style("fill", function (d) {
@@ -203,7 +212,6 @@ function makeAnotherHeatmap(data) {
             .call(d3.axisTop(xScaleForDescription).tickSize(0));
 
     }
-
 
 
     function brushed() {
@@ -235,8 +243,27 @@ function makeAnotherHeatmap(data) {
             }
         });
     }
-
 }
+
+
+// === helper function
+function getSelectionRange(selectedYear) {
+    var start = selectedYear + "-01-01";
+    var end = selectedYear + "-12-31";
+
+    $.ajax('../../ajaxGetUsageData.php', {
+        type: 'POST',
+        data: {"tag": "year", "selection": [start, end]},
+        success: function (data) {
+            var usageData = $.parseJSON(data);
+            $('#svgForHourlyData').remove();
+            $('#selectionForType').val("bedroomsAndLounge");
+            makeHeatmapForHourlyData(usageData);
+            // $('.container').append(data);
+        }
+    });
+}
+
 
 
 

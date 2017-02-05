@@ -27,24 +27,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode($allUsagePoint);
 } else if (isset($_POST['tag']) && !empty($_POST['tag'])) {
     $selection = $_POST['selection'];
+    $tag = $_POST['tag'];
+
 
     $start = date("Y-m-d", strtotime(substr($selection[0], 0, 15)));
     $end = date("Y-m-d", strtotime(substr($selection[1], 0, 15)));
 
-    $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME < '%s'";
+    if ($tag == "year") {
+        $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
+        $lowerBound = $db->query('select first("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
+
+        $start = date("Y-m-d", max(strtotime($start), strtotime($lowerBound)));
+        $end = date("Y-m-d", min(strtotime($end), strtotime($upperBound)));
+
+        $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME <= '%s' GROUP BY TIME(1h)";
+    } else {
+        $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME < '%s'";
+    }
 
     $queryString = sprintf($query, $start, $end);
-    $usagePoints = $db->query($queryString)->getPoints();
-//    print_r(count($usagePoints));
+//    print_r($queryString);
 //    echo "<br>";
+    $usagePoints = $db->query($queryString)->getPoints();
+
     echo json_encode($usagePoints);
 } else {
     echo "<p>Ajax Data Failed for period data selection!</p>";
 }
 
 
-function getPeriod($upperLimit, $lowerrLimit, $start, $end) {
-    $start = min(max(strtotime($start), strtotime($lowerrLimit)), strtotime($upperLimit));
-    $end = max(min(strtotime($end), strtotime($upperLimit)), strtotime($lowerrLimit));
-    return [date('Y-m-d H:i:s', $start), date('Y-m-d H:i:s', $end)];
-}
