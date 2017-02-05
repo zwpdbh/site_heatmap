@@ -11,6 +11,7 @@
     <script src="js/supportingJs/colorbrewer.js"></script>
     <script src="js/myJs/d3Heatmap.js"></script>
     <script src="js/myJs/d3HeatmapForDetail.js"></script>
+    <script src="js/myJs/d3HeatmapForYear.js"></script>
     <!--<script>-->
         <!--$(document).ready(function () {-->
             <!--$('#submit').on('click', function () {-->
@@ -31,7 +32,6 @@
             <!--});-->
         <!--});-->
     <!--</script>-->
-
     <script>
         $(document).ready(function () {
             $.ajax('ajaxGetUsageData.php', {
@@ -60,40 +60,34 @@
         <!--<input type="submit" value="Submit" id="submit">-->
     <!--</form>-->
 
+    <div>
+        <select id="selectionForyear">
+            <option value="2014" >2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+        </select>
+    </div>
     <div id="usageSelection" style="visibility: visible">
-        <div>
-            <input type="radio" name="selectUsage" value="bedroomsAndLounge" checked class="type">
-            <label>bedroomsAndLounge</label>
-        </div>
-        <div>
-            <input type="radio" name="selectUsage" value="heatPump" class="type">
-            <label>heatPump</label>
-        </div>
-        <div>
-            <input type="radio" name="selectUsage" value="incomerAll" class="type">
-            <label>incomerAll</label>
-        </div>
-        <div>
-            <input type="radio" name="selectUsage" value="kitchenAppliances" class="type">
-            <label>kitchenAppliances</label>
-        </div>
-        <div>
-            <input type="radio" name="selectUsage" value="laundryAndGarage" class="type">
-            <label>laundryAndGarage</label>
-        </div>
-        <div>
-            <input type="radio" name="selectUsage" value="oven" class="type">
-            <label>oven</label>
-        </div>
+        <select id="selectionForType">
+            <option value="bedroomsAndLounge">bedroomsAndLounge</option>
+            <option value="heatPump">heatPump</option>
+            <option value="kitchenAppliances">kitchenAppliances</option>
+            <option value="laundryAndGarage">laundryAndGarage</option>
+            <option value="oven">oven</option>
+            <option value="incomerAll">incomerAll</option>
+        </select>
+
     </div>
 </div>
 
 
 <div id="demo" style="visibility: visible;" >
+    <!--<div style="overflow: scroll">-->
+        <!--<svg id="yearView" style="background-color: aliceblue"></svg>-->
+    <!--</div>-->
     <div style="overflow: scroll">
         <svg id="contextsvg" style="background-color: aliceblue"></svg>
     </div>
-
     <div style="overflow: scroll">
         <svg id="detailsvg" style="background-color: aliceblue"></svg>
     </div>
