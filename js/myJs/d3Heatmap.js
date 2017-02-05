@@ -133,6 +133,8 @@ function makeHeatmapForHourlyData(data) {
 
     // d3-brush
     var brush = d3.brushX()
+        // .x(xScale)
+        // .extent([0, hourlyUsageCanvasWidth + rectWidth])
         .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
@@ -218,11 +220,18 @@ function makeHeatmapForHourlyData(data) {
         if (!d3.event.sourceEvent) return; // Only transition after input.
         if (!d3.event.selection) return; // Ignore empty selections.
 
-        var d0 = d3.event.selection.map(xScale.invert);
-        var d1 = d0.map(d3.timeDay);
-        console.log(d0, d1);
+        var start = d3.event.selection[0];
+        var end = d3.event.selection[1];
 
+        if (Math.abs(end - start) > rectWidth * 6) {
+            var d0 = [start, start + rectWidth * 6].map(xScale.invert);
+        } else {
+            d0 = d3.event.selection.map(xScale.invert);
+        }
+
+        var d1 = d0.map(d3.timeDay);
         // If empty when rounded, use floor & ceil instead.
+        // d1[0] and d1[1] are String
         if (d1[0] >= d1[1]) {
             d1[0] = d3.timeDay.ceil(d0[0]);
             d1[1] = d3.timeDay.offset(d1[0]);
@@ -231,6 +240,9 @@ function makeHeatmapForHourlyData(data) {
         d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
         drawDetailBetween(d1);
     }
+
+
+
 
     function drawDetailBetween(selection) {
         $.ajax('../../ajaxGetUsageData.php', {
