@@ -13,7 +13,7 @@
 <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
 <script>
     var data = new Array(200);
-    for (var i = 0; i < data.length; i++) data[i] = Math.random() > 0.5 ? "Orange" : "Cyan";
+    for (i=0; i<data.length; i++) data[i] = Math.random() > 0.5 ? "Orange" : "Cyan";
 
     var width = 800,
         height = 300;
@@ -22,51 +22,47 @@
         .attr("width", width)
         .attr("height", height);
 
-    //    bar = function(range) {
-    //
-    //        var xScale = d3.scale.linear()
-    //            .domain([0, range.length])
-    //            .range([0, width]);
-    //
-    //        svg.selectAll("rect.items").remove();
-    //
-    //        svg.selectAll("rect.items")
-    //            .data(range)
-    //            .enter().append("svg:rect")
-    //            .attr("class", "items")
-    //            .attr("x", function(d, i) {return xScale(i);})
-    //            .attr("y", 0)
-    //            .attr("width",  width/range.length-2)
-    //            .attr("height", 100)
-    //            .attr("fill", function(d) {return d})
-    //            .attr("title", function(d) {return d});
-    //    }
+    bar = function(range) {
 
-    var start = 40;
+        var x_range = d3.scale.linear()
+            .domain([0, range.length])
+            .range([0, width]);
 
-//    var control_xScale = d3.scale.linear()
-//        .domain([0, data.length])
-//        .range([0, width]);
+        svg.selectAll("rect.items").remove();
 
-//    controlBar = svg.selectAll("rect.itemsControl")
-//        .data(data)
-//        .enter().append("svg:rect")
-//        .attr("class", "itemsControl")
-//        .attr("x", function (d, i) {
-//            return control_xScale(i);
-//        })
-//        .attr("y", 110)
-//        .attr("width", width / data.length - 2)
-//        .attr("height", 20)
-//        .attr("fill", function (d) {
-//            return d
-//        });
+        svg.selectAll("rect.items")
+            .data(range)
+            .enter().append("svg:rect")
+            .attr("class", "items")
+            .attr("x", function(d, i) {return x_range(i);})
+            .attr("y", 0)
+            .attr("width",  width/range.length-2)
+            .attr("height", 100)
+            .attr("fill", function(d) {return d})
+            .attr("title", function(d) {return d});
+    }
+
+    var start = 21;
+    bar(data.slice(0, start), true);
+
+    var control_x_range = d3.scale.linear()
+        .domain([0, data.length])
+        .range([0, width]);
+
+    controlBar = svg.selectAll("rect.itemsControl")
+        .data(data)
+        .enter().append("svg:rect")
+        .attr("class", "itemsControl")
+        .attr("x", function(d, i) {return control_x_range(i);})
+        .attr("y", 110)
+        .attr("width",  width/data.length-2)
+        .attr("height", 20)
+        .attr("fill", function(d) {return d});
 
     svg.append("g")
         .attr("class", "brush")
-        .call(d3.svg.brush()
-            .x(d3.scale.linear().range([0, width]))
-            .extent([0, 10 / data.length])
+        .call(d3.svg.brush().x(d3.scale.linear().range([0, width]))
+            .extent([0,1*start/data.length])
             .on("brush", brush))
         .selectAll("rect")
         .attr("y", 110)
@@ -74,13 +70,13 @@
 
     function brush() {
         var s = d3.event.target.extent();
-        if (s[1] - s[0] < 0.2) {
+        if (s[1]-s[0] < 0.5) {
+            var start = Math.round((data.length-1)*s[0]);
+            var end = Math.round((data.length-1)*s[1]);
 
+            bar(data.slice(start,end));
         }
-        else {
-            d3.event.target.extent([s[0], s[0] + 0.5]);
-            d3.event.target(d3.select(this));
-        }
+        else {d3.event.target.extent([s[0],s[0]+0.5]); d3.event.target(d3.select(this));}
     }
 
 </script>

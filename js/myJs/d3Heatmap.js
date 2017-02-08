@@ -69,8 +69,6 @@ function makeHeatmapForHourlyData(data) {
     });
 
 
-
-
     var xScale = d3.scaleTime().domain(timeExtent).rangeRound([0, hourlyUsageCanvasWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
 
@@ -118,7 +116,7 @@ function makeHeatmapForHourlyData(data) {
         .attr("class", "xAxisG")
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .call(d3.axisTop(xScale)
-        .ticks(d3.timeDay)
+            .ticks(d3.timeDay)
             .tickPadding(5));
 
     var yAxisValues = [];
@@ -133,13 +131,13 @@ function makeHeatmapForHourlyData(data) {
 
     // d3-brush
     var brush = d3.brushX()
-        // .x(xScale)
-        // .extent([0, hourlyUsageCanvasWidth + rectWidth])
+    // .x(xScale)
+    // .extent([0, hourlyUsageCanvasWidth + rectWidth])
         .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
-        .attr("class", "brush")
+        .attr("id", "brushSelection")
         .call(brush);
 
 
@@ -223,6 +221,68 @@ function makeHeatmapForHourlyData(data) {
         var start = d3.event.selection[0];
         var end = d3.event.selection[1];
 
+
+        // var brushSelectionWidth = d3.select("#brushSelection")
+        //     .selectAll("rect")
+        //     .select(function (d, i) {
+        //         if (d.type == "selection") {
+        //             // this is the "rect" with class "selection"
+        //             return this;
+        //         } else {
+        //             return null;
+        //         }
+        //     }).style("width");
+
+
+        // if (brushSelectionWidth > rectWidth * 4) {
+        //     d3.select("#brushSelection")
+        //         .selectAll("rect")
+        //         .select(function (d, i) {
+        //             if (d.type == "selection") {
+        //                 console.log(this);
+        //                 return this;
+        //             } else {
+        //                 return null;
+        //             }
+        //         }).style("width", rectWidth * 4);
+        // }
+
+
+        d3.select("#brushSelection")
+            .selectAll("rect")
+            .select(function (d, i) {
+                if (d.type == "selection") {
+                    // this is the "rect" with class "selection"
+                    return this;
+                } else {
+                    return null;
+                }
+            }).style("width", function (d) {
+
+            var rightPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
+                if (d.type == "e") {
+                    // console.log(this);
+                    return this;
+                } else {
+                    return null;
+                }
+            }).style("x");
+
+            var leftPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
+                if (d.type == "w") {
+                    // console.log(this);
+                    return this;
+                } else {
+                    return null;
+                }
+            }).style("x");
+            console.log(leftPosition, rightPosition);
+            console.log(rightPosition - leftPosition);
+
+            return 80;
+        });
+
+        // if the selection range is too big, limit its selection
         if (Math.abs(end - start) > rectWidth * 6) {
             var d0 = [start, start + rectWidth * 6].map(xScale.invert);
         } else {
@@ -240,8 +300,6 @@ function makeHeatmapForHourlyData(data) {
         d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
         drawDetailBetween(d1);
     }
-
-
 
 
     function drawDetailBetween(selection) {

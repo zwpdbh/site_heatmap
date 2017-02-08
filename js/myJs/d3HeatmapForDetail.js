@@ -3,7 +3,7 @@
  */
 
 function drawHeatmapForDetail(data) {
-    console.log(data.length);
+    // console.log(data.length);
 
    $('.detailUsageCanvas').remove();
 
