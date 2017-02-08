@@ -1,10 +1,10 @@
 #hourlyDataSVGContainer {
     position:fixed;
-    width:60%;
+    width:50%;
 }
 
 #detailDataContainer {
     position:fixed;
-    width:40%;
+    width:50%;
     right: 0px;
 }

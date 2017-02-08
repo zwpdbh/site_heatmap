@@ -11,7 +11,9 @@ function drawHeatmapForDetail(data) {
     // var timeFormatToDisplay = d3.timeFormat('%Y/%m/%d %H');
 
     var marginForDetail = {top: 80, left: 80, bottom: 80, right: 80};
-    var detailSVGWidth = 960;
+    var widthString =  d3.select("#detailDataContainer").style("width");
+    var detailSVGWidth = widthString.substring(0, widthString.length - 2);
+
     var detailSVGHeight = 500;
     var detailUsageCanvasHeight = detailSVGHeight - marginForDetail.top - marginForDetail.bottom;
     var detailUsageCanvasWidth = detailSVGWidth - marginForDetail.left - marginForDetail.right;
