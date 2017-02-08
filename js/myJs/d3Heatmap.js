@@ -180,7 +180,7 @@ function makeHeatmapForHourlyData(data) {
     // ------------infomation that need to be redraw, END
 
     $('#selectionForType').on('change', function () {
-        var selectedType = $(this).val();
+        selectedType = $(this).val();
         category = "mean_" + selectedType;
         maximumUsage = getMaxUsageAccordingTo(category);
         update();

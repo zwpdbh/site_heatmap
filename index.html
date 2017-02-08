@@ -11,6 +11,7 @@
     <script src="js/supportingJs/colorbrewer.js"></script>
     <script src="js/myJs/d3Heatmap.js"></script>
     <script src="js/myJs/d3HeatmapForDetail.js"></script>
+    <link rel="stylesheet" href="css/d3.css">
     <!--<script>-->
         <!--$(document).ready(function () {-->
             <!--$('#submit').on('click', function () {-->
@@ -81,10 +82,9 @@
 
 
 <div id="demo" style="visibility: visible;" >
-    <div style="overflow: scroll" id="hourlyDataSVGContainer">
-    </div>
-    <div style="overflow: scroll">
-        <svg id="detailsvg" style="background-color: aliceblue"></svg>
+    <div style="overflow: scroll" id="hourlyDataSVGContainer"></div>
+    <div style="overflow: scroll" id="detailDataContainer">
+        <svg id="detailsvg" style="background-color: aliceblue; width: 960px; height: 500px"></svg>
     </div>
 </div>
 </body>
