@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/limitBrushSizeDemo.html" afterPath="$PROJECT_DIR$/demo/limitBrushSizeDemo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js" afterPath="$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js" />
     </list>
     <list id="fd42cda0-3470-409e-aa07-883b5c07b5c0" name="Rejected commit: Default" comment="add more interactive function" />
     <ignored path="site_heatmap.iws" />
@@ -44,11 +41,12 @@
           <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="559">
-                  <caret line="279" column="54" lean-forward="false" selection-start-line="279" selection-start-column="54" selection-end-line="279" selection-end-column="54" />
+                <state relative-caret-position="34">
+                  <caret line="289" column="12" lean-forward="false" selection-start-line="289" selection-start-column="12" selection-end-line="289" selection-end-column="12" />
                   <folding>
                     <element signature="e#6888#6945#0" expanded="false" />
                     <element signature="e#7302#7347#0" expanded="false" />
+                    <element signature="e#8198#8200#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -474,12 +472,12 @@
       <workItem from="1486240940657" duration="5218000" />
       <workItem from="1486264101417" duration="2085000" />
       <workItem from="1486271880719" duration="10648000" />
-      <workItem from="1486537106437" duration="9201000" />
+      <workItem from="1486537106437" duration="9595000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156448000" />
+    <option name="totallyTimeSpent" value="156842000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -852,11 +850,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="279" column="54" lean-forward="false" selection-start-line="279" selection-start-column="54" selection-end-line="279" selection-end-column="54" />
+        <state relative-caret-position="34">
+          <caret line="289" column="12" lean-forward="false" selection-start-line="289" selection-start-column="12" selection-end-line="289" selection-end-column="12" />
           <folding>
             <element signature="e#6888#6945#0" expanded="false" />
             <element signature="e#7302#7347#0" expanded="false" />
+            <element signature="e#8198#8200#0" expanded="false" />
           </folding>
         </state>
       </provider>

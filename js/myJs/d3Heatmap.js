@@ -258,36 +258,43 @@ function makeHeatmapForHourlyData(data) {
                     return null;
                 }
             }).style("width", function (d) {
-
-            var rightPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
-                if (d.type == "e") {
-                    // console.log(this);
-                    return this;
-                } else {
-                    return null;
-                }
-            }).style("x");
-
-            var leftPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
-                if (d.type == "w") {
-                    // console.log(this);
-                    return this;
-                } else {
-                    return null;
-                }
-            }).style("x");
-            console.log(leftPosition, rightPosition);
-            console.log(rightPosition - leftPosition);
-
-            return 80;
+                return rectWidth * 3;
+            //
+            // var rightPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
+            //     if (d.type == "e") {
+            //         // console.log(this);
+            //         return this;
+            //     } else {
+            //         return null;
+            //     }
+            // }).style("x");
+            //
+            // var leftPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
+            //     if (d.type == "w") {
+            //         // console.log(this);
+            //         return this;
+            //     } else {
+            //         return null;
+            //     }
+            // }).style("x");
+            // var leftP = leftPosition.substr(0, leftPosition.length - 2);
+            // var rightP = rightPosition.substring(0, rightPosition.length - 2);
+            // // console.log(leftPosition, rightPosition);
+            // // console.log(rightP - leftP);
+            // if ((rightP - leftP) > rectWidth * 4) {
+            //     return rectWidth * 4
+            // } else {
+            //     return rightP - leftP;
+            // }
         });
+        var d0 = d3.event.selection.map(xScale.invert);
 
         // if the selection range is too big, limit its selection
-        if (Math.abs(end - start) > rectWidth * 6) {
-            var d0 = [start, start + rectWidth * 6].map(xScale.invert);
-        } else {
-            d0 = d3.event.selection.map(xScale.invert);
-        }
+        // if (Math.abs(end - start) > rectWidth * 6) {
+        //     var d0 = [start, start + rectWidth * 6].map(xScale.invert);
+        // } else {
+        //     d0 = d3.event.selection.map(xScale.invert);
+        // }
 
         var d1 = d0.map(d3.timeDay);
         // If empty when rounded, use floor & ceil instead.
