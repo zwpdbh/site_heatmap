@@ -117,7 +117,7 @@ function makeHeatmapForHourlyData(data) {
         .attr("class", "xAxisG")
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .call(d3.axisTop(xScale)
-            .ticks(d3.timeWeek)
+            .ticks(d3.timeMonth)
             .tickPadding(5));
 
     var yAxisValues = [];

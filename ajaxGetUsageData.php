@@ -13,7 +13,7 @@ use InfluxDB\Client;
 $client = new InfluxDB\Client("localhost", "8086");
 $db = $client->selectDB('heatmap');
 
-$testQueryString = "select mean(*) from powerusage where time >= '2014-07-14' and time < '2015-07-18' group by time(1h)";
+//$testQueryString = "select mean(*) from powerusage where time >= '2014-07-14' and time < '2015-07-18' group by time(1h)";
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
     $queryString = sprintf($query, $lowerBound, $upperBound);
 
-    $allUsagePoint = $db->query($testQueryString)->getPoints();
+    $allUsagePoint = $db->query($queryString)->getPoints();
     echo json_encode($allUsagePoint);
 } else if (isset($_POST['tag']) && !empty($_POST['tag'])) {
     $selection = $_POST['selection'];
