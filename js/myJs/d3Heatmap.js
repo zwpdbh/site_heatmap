@@ -70,7 +70,7 @@ function makeHeatmapForHourlyData(data) {
     });
 
 
-    var xScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth]);
+    var xScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth - rectWidth]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
 
     // get the maximum power usage
@@ -132,9 +132,7 @@ function makeHeatmapForHourlyData(data) {
 
     // d3-brush
     var brush = d3.brushX()
-    // .x(xScale)
-    // .extent([0, hourlyUsageCanvasWidth + rectWidth])
-        .extent([[0, 0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
+        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
@@ -224,6 +222,7 @@ function makeHeatmapForHourlyData(data) {
         var start = d3.event.selection[0];
         var end = d3.event.selection[1];
 
+        // user can only select to see the detail within one day
         var selectLimit = 1;
 
         d3.select("#brushSelection")
@@ -249,10 +248,10 @@ function makeHeatmapForHourlyData(data) {
         var d1 = d0.map(d3.timeDay);
         // If empty when rounded, use floor & ceil instead.
         // d1[0] and d1[1] are String
-        if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.ceil(d0[0]);
-            d1[1] = d3.timeDay.offset(d1[0]);
-        }
+        // if (d1[0] >= d1[1]) {
+        //     d1[0] = d3.timeDay.ceil(d0[0]);
+        //     d1[1] = d3.timeDay.offset(d1[0]);
+        // }
 
         d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
         drawDetailBetween(d1);
@@ -276,7 +275,8 @@ function makeHeatmapForHourlyData(data) {
 // select year,  update svg for power usage with hourly percision
 function getSelectionRange(selectedYear) {
     var start = selectedYear + "-01-01";
-    var end = selectedYear + "-12-31";
+    var end =  (parseInt(selectedYear) + 1).toString()  + "-01-01";
+    // console.log(end);
 
     $.ajax('../../ajaxGetUsageData.php', {
         type: 'POST',

@@ -19,7 +19,7 @@
             // the selected usage type is "bedroomsAndLounge".
             $.ajax('../../ajaxGetUsageData.php', {
                 type: 'POST',
-                data: {"tag": "year", "selection": ["2014-01-01", "2014-12-31"]},
+                data: {"tag": "year", "selection": ["2014-01-01", "2015-01-01"]},
                 success: function (data) {
                     var usageData = $.parseJSON(data);
                     $('#svgForHourlyData').remove();

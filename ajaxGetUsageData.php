@@ -31,7 +31,7 @@ if (isset($_POST['tag']) && !empty($_POST['tag'])) {
         $start = date("Y-m-d", max(strtotime($start), strtotime($lowerBound)));
         $end = date("Y-m-d", min(strtotime($end), strtotime($upperBound)));
 
-        $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME <= '%s' GROUP BY TIME(1h)";
+        $query = "SELECT mean(*) FROM powerusage WHERE TIME >= '%s' and TIME < '%s' GROUP BY TIME(1h)";
     } else {
         // otherwise, just update the usage data with persicion: per minuets.
         $query = "SELECT * FROM powerusage WHERE TIME >= '%s' and TIME < '%s'";

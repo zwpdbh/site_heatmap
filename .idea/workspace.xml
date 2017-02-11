@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="683955da-b536-486c-9fbd-55d224ce77b4" name="Default" comment="add more interactive function">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajaxGetUsageData.php" afterPath="$PROJECT_DIR$/ajaxGetUsageData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" afterPath="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js" afterPath="$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js" />
     </list>
     <list id="fd42cda0-3470-409e-aa07-883b5c07b5c0" name="Rejected commit: Default" comment="add more interactive function" />
     <ignored path="site_heatmap.iws" />
@@ -38,20 +38,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="d3Heatmap.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret line="122" column="25" lean-forward="true" selection-start-line="122" selection-start-column="25" selection-end-line="122" selection-end-column="25" />
+            <state relative-caret-position="120">
+              <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="d3HeatmapForDetail.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="77" lean-forward="false" selection-start-line="21" selection-start-column="77" selection-end-line="21" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="d3HeatmapForDetail.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="285">
               <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
               <folding>
                 <element signature="n#!!doc;n#drawHeatmapForDetail#0" expanded="false" />
@@ -64,12 +74,12 @@
         <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="369">
-              <caret line="33" column="79" lean-forward="false" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+              <caret line="33" column="78" lean-forward="false" selection-start-line="33" selection-start-column="78" selection-end-line="33" selection-end-column="78" />
               <folding>
-                <marker date="1486853344000" expanded="true" signature="789:837" ph="select last(... " />
-                <marker date="1486853344000" expanded="true" signature="899:948" ph="select first... " />
-                <marker date="1486853344000" expanded="true" signature="1152:1236" ph="SELECT mean(... powerusage" />
-                <marker date="1486853344000" expanded="true" signature="1348:1407" ph="SELECT * FRO... powerusage" />
+                <marker date="1486854632000" expanded="true" signature="789:837" ph="select last(... " />
+                <marker date="1486854632000" expanded="true" signature="899:948" ph="select first... " />
+                <marker date="1486854632000" expanded="true" signature="1152:1235" ph="SELECT mean(... powerusage" />
+                <marker date="1486854632000" expanded="true" signature="1347:1406" ph="SELECT * FRO... powerusage" />
               </folding>
             </state>
           </provider>
@@ -87,7 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>totalDays</find>
       <find>xScale</find>
       <find>yScale</find>
       <find>xTimeScale</find>
@@ -117,6 +126,7 @@
       <find>getSelectionRange</find>
       <find>&quot;Please select date range to view usage:&quot;</find>
       <find>timeMon</find>
+      <find>hourlyUsageCanvasWidth</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,10 +160,10 @@
         <option value="$PROJECT_DIR$/demo/controlBrushDemo.html" />
         <option value="$PROJECT_DIR$/demo/limitBrushSizeDemo.html" />
         <option value="$PROJECT_DIR$/css/d3.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/demo/d3Brush.html" />
         <option value="$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js" />
         <option value="$PROJECT_DIR$/ajaxGetUsageData.php" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/myJs/d3Heatmap.js" />
       </list>
     </option>
@@ -462,12 +472,12 @@
       <workItem from="1486669202742" duration="794000" />
       <workItem from="1486703864201" duration="599000" />
       <workItem from="1486801242838" duration="2720000" />
-      <workItem from="1486852238401" duration="1196000" />
+      <workItem from="1486852238401" duration="2483000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163370000" />
+    <option name="totallyTimeSpent" value="164657000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
@@ -746,6 +756,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1080">
           <caret line="72" column="15" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -760,6 +771,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="649">
           <caret line="51" column="31" lean-forward="true" selection-start-line="47" selection-start-column="12" selection-end-line="51" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -770,47 +782,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="62" lean-forward="true" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#svg#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ajaxGetUsageData.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
-          <caret line="33" column="79" lean-forward="false" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+          <caret line="33" column="78" lean-forward="false" selection-start-line="33" selection-start-column="78" selection-end-line="33" selection-end-column="78" />
           <folding>
-            <marker date="1486853344000" expanded="true" signature="789:837" ph="select last(... " />
-            <marker date="1486853344000" expanded="true" signature="899:948" ph="select first... " />
-            <marker date="1486853344000" expanded="true" signature="1152:1236" ph="SELECT mean(... powerusage" />
-            <marker date="1486853344000" expanded="true" signature="1348:1407" ph="SELECT * FRO... powerusage" />
+            <marker date="1486854632000" expanded="true" signature="789:837" ph="select last(... " />
+            <marker date="1486854632000" expanded="true" signature="899:948" ph="select first... " />
+            <marker date="1486854632000" expanded="true" signature="1152:1235" ph="SELECT mean(... powerusage" />
+            <marker date="1486854632000" expanded="true" signature="1347:1406" ph="SELECT * FRO... powerusage" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="122" column="25" lean-forward="true" selection-start-line="122" selection-start-column="25" selection-end-line="122" selection-end-column="25" />
+        <state relative-caret-position="315">
+          <caret line="21" column="77" lean-forward="false" selection-start-line="21" selection-start-column="77" selection-end-line="21" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/myJs/d3HeatmapForDetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="285">
           <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
           <folding>
             <element signature="n#!!doc;n#drawHeatmapForDetail#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/myJs/d3Heatmap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
