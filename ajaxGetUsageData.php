@@ -6,15 +6,16 @@
  * Time: 10:39 AM
  */
 
+// use composer to import php-influxdb library
 require_once '/usr/local/share/php-composer/vendor/autoload.php';
-
 use InfluxDB\Client;
 
+
+// connect to influxdb: address is localhost, port is 8086 and use heatmap database
 $client = new InfluxDB\Client("localhost", "8086");
 $db = $client->selectDB('heatmap');
 
-//$testQueryString = "select mean(*) from powerusage where time >= '2014-07-14' and time < '2015-07-18' group by time(1h)";
-
+// By default, the index page shows the data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $upperBound = $db->query('select last("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
     $lowerBound = $db->query('select first("bedroomsAndLounge") from powerusage')->getPoints()[0]['time'];
