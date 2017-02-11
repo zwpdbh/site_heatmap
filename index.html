@@ -12,35 +12,22 @@
     <script src="js/myJs/d3Heatmap.js"></script>
     <script src="js/myJs/d3HeatmapForDetail.js"></script>
     <link rel="stylesheet" href="css/d3.css">
-    <!--<script>-->
-        <!--$(document).ready(function () {-->
-            <!--$('#submit').on('click', function () {-->
-                <!--var between = $('#between').val();-->
-                <!--var and = $('#and').val();-->
-                <!--if (between && and) {-->
-                    <!--$.ajax('ajaxGetUsageData.php', {-->
-                        <!--type: 'POST',-->
-                        <!--data: {'between': between, 'and': and},-->
-                        <!--success: function (data) {-->
-                            <!--var usageData = $.parseJSON(data);-->
-                            <!--$('#demo').css('visibility', 'visible');-->
-                            <!--$('#usageSelection').css('visibility', 'visible');-->
-                            <!--makeHeatMap(usageData);-->
-                        <!--}-->
-                    <!--});-->
-                <!--}-->
-            <!--});-->
-        <!--});-->
-    <!--</script>-->
+
     <script>
         $(document).ready(function () {
-            $.ajax('ajaxGetUsageData.php', {
-                type: 'GET',
+            // By default, the index page shows the data from year 2014 and
+            // the selected usage type is "bedroomsAndLounge".
+            $.ajax('../../ajaxGetUsageData.php', {
+                type: 'POST',
+                data: {"tag": "year", "selection": ["2014-01-01", "2014-12-31"]},
                 success: function (data) {
                     var usageData = $.parseJSON(data);
+                    $('#svgForHourlyData').remove();
+                    $('#selectionForType').val("bedroomsAndLounge");
                     makeHeatmapForHourlyData(usageData);
                 }
             });
+
         });
     </script>
 </head>
@@ -49,17 +36,6 @@
 <h3>Heatmap for power usage</h3>
 <p>Please select date range to view usage:</p>
 <div class="container">
-
-    <!--<form style="visibility: hidden" id="dateSelctionForm" action="ajaxGetUsageData.php" method="post" onsubmit="return false ">-->
-        <!--<label for="between">Between</label>-->
-        <!--<input type="text" id="between" name="between">-->
-
-        <!--<label for="and">And</label>-->
-        <!--<input type="text" id="and" name="and">-->
-
-        <!--<input type="submit" value="Submit" id="submit">-->
-    <!--</form>-->
-
     <div>
         <select id="selectionForyear">
             <option value="2014" >2014</option>

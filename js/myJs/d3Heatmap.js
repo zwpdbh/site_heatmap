@@ -163,7 +163,7 @@ function makeHeatmapForHourlyData(data) {
         .attr('width', legendCanvasRectWidth)
         .attr('height', hourlyUsageCanvasHeight / 24)
         .attr('x', function (d, i) {
-            return margin.left + i * legendCanvasRectWidth;  // the power usage number can be long, so make the rect twice width
+            return margin.left + i * legendCanvasRectWidth;
         })
         .attr('y', margin.top / 3)
         .style('fill', function (d, i) {
@@ -233,38 +233,9 @@ function makeHeatmapForHourlyData(data) {
                 } else {
                     return null;
                 }
-            }).style("width", function (d) {
+            }).style("width", function () {
                 return rectWidth * selectLimit;
-            //
-            // var rightPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
-            //     if (d.type == "e") {
-            //         // console.log(this);
-            //         return this;
-            //     } else {
-            //         return null;
-            //     }
-            // }).style("x");
-            //
-            // var leftPosition = d3.select("#brushSelection").selectAll("rect").select(function (d) {
-            //     if (d.type == "w") {
-            //         // console.log(this);
-            //         return this;
-            //     } else {
-            //         return null;
-            //     }
-            // }).style("x");
-            // var leftP = leftPosition.substr(0, leftPosition.length - 2);
-            // var rightP = rightPosition.substring(0, rightPosition.length - 2);
-            // // console.log(leftPosition, rightPosition);
-            // // console.log(rightP - leftP);
-            // if ((rightP - leftP) > rectWidth * 4) {
-            //     return rectWidth * 4
-            // } else {
-            //     return rightP - leftP;
-            // }
-
         });
-        // var d0 = d3.event.selection.map(xScale.invert);
 
         // if the selection range is too big, limit its selection
         if (Math.abs(end - start) > rectWidth * selectLimit) {
@@ -286,6 +257,7 @@ function makeHeatmapForHourlyData(data) {
     }
 
 
+    // use this function to update the svg for power usage with minutes percision
     function drawDetailBetween(selection) {
         $.ajax('../../ajaxGetUsageData.php', {
             type: 'POST',
@@ -299,7 +271,7 @@ function makeHeatmapForHourlyData(data) {
 }
 
 
-// === helper function
+// select year,  update svg for power usage with hourly percision
 function getSelectionRange(selectedYear) {
     var start = selectedYear + "-01-01";
     var end = selectedYear + "-12-31";

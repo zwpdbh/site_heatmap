@@ -54,12 +54,12 @@
         .attr("text-anchor", null)
         .selectAll("text")
         .attr("x", 6);
-//
-//    svg.append("g")
-//        .attr("class", "brush")
-//        .call(d3.brushX()
-//            .extent([[0, 0], [width, height]])
-//            .on("end", brushended));
+
+    svg.append("g")
+        .attr("class", "brush")
+        .call(d3.brushX()
+            .extent([[0, 0], [width, height]])
+            .on("end", brushended));
 
 
 
