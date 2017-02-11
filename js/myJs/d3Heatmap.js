@@ -117,7 +117,7 @@ function makeHeatmapForHourlyData(data) {
         .attr("class", "xAxisG")
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
         .call(d3.axisTop(xScale)
-            .ticks(d3.timeMonth)
+            .ticks(d3.timeWeek)
             .tickPadding(5));
 
     var yAxisValues = [];
@@ -134,7 +134,7 @@ function makeHeatmapForHourlyData(data) {
     var brush = d3.brushX()
     // .x(xScale)
     // .extent([0, hourlyUsageCanvasWidth + rectWidth])
-        .extent([[0, 0], [hourlyUsageCanvasWidth + rectWidth, hourlyUsageCanvasHeight + rectHeight]])
+        .extent([[0, 0], [hourlyUsageCanvasWidth, hourlyUsageCanvasHeight + rectHeight]])
         .on("end", brushed);
 
     hourlyUsageCanvas.append("g")
@@ -190,8 +190,9 @@ function makeHeatmapForHourlyData(data) {
         getSelectionRange(selectedYear);
     });
 
+
+    // update the color of rect
     function update() {
-        // update the color of rect
         hourlyUsageRect.style("fill", function (d) {
             return colorScale(d[category]);
         });
@@ -215,6 +216,7 @@ function makeHeatmapForHourlyData(data) {
     }
 
 
+    // each time after brushing, this function get called.
     function brushed() {
         if (!d3.event.sourceEvent) return; // Only transition after input.
         if (!d3.event.selection) return; // Ignore empty selections.
