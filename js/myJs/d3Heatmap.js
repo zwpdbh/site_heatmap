@@ -49,7 +49,7 @@ function makeHeatmapForHourlyData(data) {
     var hourlyUsageCanvasHeight = svgHeight - margin.top - margin.bottom;
     var rectHeight = hourlyUsageCanvasHeight / 24;
     var rectWidth = rectHeight;
-    var svgWidth = margin.left + totalDays * rectWidth + margin.right;
+    var svgWidth = margin.left + (totalDays) * rectWidth + margin.right;
     var hourlyUsageCanvasWidth = svgWidth - margin.left - margin.right;
 
 
@@ -70,7 +70,7 @@ function makeHeatmapForHourlyData(data) {
     });
 
 
-    var xScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth - rectWidth]);
+    var xScale = d3.scaleTime().domain(timeExtent).range([0, hourlyUsageCanvasWidth - 1]);
     var yScale = d3.scaleLinear().domain([0, 23]).range([0, hourlyUsageCanvasHeight]);
 
     // get the maximum power usage
@@ -248,11 +248,11 @@ function makeHeatmapForHourlyData(data) {
         var d1 = d0.map(d3.timeDay);
         // If empty when rounded, use floor & ceil instead.
         // d1[0] and d1[1] are String
-        // if (d1[0] >= d1[1]) {
-        //     d1[0] = d3.timeDay.ceil(d0[0]);
-        //     d1[1] = d3.timeDay.offset(d1[0]);
-        // }
-
+        if (d1[0] >= d1[1]) {
+            d1[0] = d3.timeDay.ceil(d0[0]);
+            d1[1] = d3.timeDay.offset(d1[0]);
+        }
+        // console.log(d1[0], d1[1]);
         d3.select(this).transition().call(d3.event.target.move, d1.map(xScale));
         drawDetailBetween(d1);
     }
